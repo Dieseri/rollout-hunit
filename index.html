@@ -129,10 +129,12 @@ tr:hover td{background:var(--surface2)}
                             <td><span class="status-badge status-em-andamento">🔴 Sem previsão</span></td>
                         </tr>
                         <tr>
-                            <td><strong>White Label SuperApp</strong></td>
+                            <td><strong>White Label SuperApp</strong> <span class="tooltip">ℹ️<span class="tooltiptext">11 dos 40 hotéis candidatos ao piloto dependem do SuperApp como ferramenta fundamental. Optaram por não migrar até disponibilidade da versão white label. Aguardando status e previsão do time Franco.</span></span>
+                                <br><span style="font-size:0.78em; color:var(--red);">🔴 Bloqueador de adesão — 11 hotéis aguardando</span>
+                            </td>
                             <td>Franco S.</td>
                             <td>—</td>
-                            <td><span class="status-badge status-em-andamento">🔴 Pendente</span></td>
+                            <td><span class="status-badge status-em-andamento">🔴 Bloqueado</span></td>
                         </tr>
                         <tr>
                             <td><strong>Central One → Omnibees</strong> <span class="tooltip">ℹ️<span class="tooltiptext">11 tasks em andamento · Pendências: tabelas HPRICE/Datalake (18/05) · Bug SSO HUNIT-Lite (sem previsão) · Staging após 18/05</span></span></td>
@@ -673,6 +675,44 @@ tr:hover td{background:var(--surface2)}
 
                         <div style="margin-top: 12px; padding: 10px; background:var(--surface2); border-left: 3px solid #4299e1; border-radius: 4px; font-size:0.83em;">
                             <strong>⚠️ Essencial:</strong> Central One é o ponto de entrada do hoteleiro — bloqueia 100% dos hotéis até conclusão. Ver aba Central One para detalhes completos.
+                        </div>
+                    </div>
+
+                    <!-- Bloqueador 9: SUPERAPP -->
+                    <div style="background:var(--surface2); padding: 20px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #e53e3e;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h5 style="color:var(--text); margin: 0 0 8px 0; font-size: 1em; font-weight: 600;">
+                                    📱 White Label SuperApp HSystem
+                                </h5>
+                                <p style="margin: 0; color:var(--text2); font-size: 0.85em; line-height: 1.5;">Aplicativo mobile legado que concentra as principais funcionalidades do channel manager. Hotéis dependentes optaram por não migrar até que a versão white label Omnibees esteja disponível.</p>
+                                <p style="margin: 5px 0 0 0; color:var(--text2); font-size: 0.8em;">Responsável: <strong>equipe Franco</strong></p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background:rgba(239,68,68,.15); color:#fc8181; padding: 6px 16px; border-radius: 4px; font-weight: 500; font-size: 0.85em; white-space: nowrap;">
+                                    🔴 Aguardando status
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Métrica -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 15px 0;">
+                            <div style="background:var(--surface); padding: 15px; border-radius: 4px; text-align: center; border:1px solid var(--border);">
+                                <div style="font-size: 1.8em; color:var(--text2); font-weight: 600;">40</div>
+                                <div style="color:var(--text2); font-size: 0.8em; margin-top: 4px;">Candidatos ao Piloto</div>
+                            </div>
+                            <div style="background:rgba(239,68,68,.08); padding: 15px; border-radius: 4px; text-align: center; border: 1px solid #fc8181;">
+                                <div style="font-size: 1.8em; color:var(--red); font-weight: 600;">11</div>
+                                <div style="color:var(--red); font-size: 0.8em; margin-top: 4px;">Bloqueados</div>
+                            </div>
+                            <div style="background:rgba(34,197,94,.08); padding: 15px; border-radius: 4px; text-align: center; border: 1px solid #68d391;">
+                                <div style="font-size: 1.8em; color:var(--green); font-weight: 600;">29</div>
+                                <div style="color:var(--green); font-size: 0.8em; margin-top: 4px;">Aptos (sem dependência)</div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 12px; background:rgba(239,68,68,.08); border-left: 3px solid #e53e3e; border-radius: 4px; font-size:0.83em;">
+                            <strong style="color:var(--red);">⏳ Previsão:</strong> <span style="color:var(--text2);">Aguardando retorno do time Franco — email enviado ao comitê em 25/05/2026 solicitando status e previsão de entrega.</span>
                         </div>
                     </div>
 
@@ -1819,6 +1859,11 @@ tr:hover td{background:var(--surface2)}
                             <br><span style="font-size:0.9em; color:var(--orange); margin-left:25px;">└─ ⏳ Sincronização dados HPRICE/Datalake — tabelas previstas para 18/05</span>
                             <br><span style="font-size:0.9em; color:var(--red); margin-left:25px;">└─ 🔴 Bug SSO HUNIT-Lite (realm separado <code>auth.hotelchannelmanager.ai</code>) — Sem previsão</span>
                             <br><span style="font-size:0.9em; color:var(--text3); margin-left:25px;">└─ Equipe: Thiago O., Jaiane, Dieseri M.</span>
+                        </p>
+                        <p><input type="checkbox" disabled> <strong>White Label SuperApp HSystem</strong> 🔴 <span style="color:var(--red);">Bloqueador de adesão — aguardando status do time Franco</span>
+                            <br><span style="font-size:0.9em; color:var(--text2); margin-left:25px;">└─ Aplicativo mobile legado que concentra as principais funcionalidades do channel manager</span>
+                            <br><span style="font-size:0.9em; color:var(--red); margin-left:25px;">└─ 🔴 11 dos 40 hotéis candidatos dependem do SuperApp — optaram por não migrar até disponibilidade</span>
+                            <br><span style="font-size:0.9em; color:var(--text3); margin-left:25px;">└─ Previsão: aguardando · Responsável: equipe Franco</span>
                         </p>
                     </div>
                 </div>
