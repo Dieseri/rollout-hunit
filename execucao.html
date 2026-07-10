@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rollout Hunit Plus — Painel de Migração</title>
+<style>
+  :root{
+    --azul:#0399f8; --azul-esc:#0b6bb3; --tinta:#0f2233; --cinza:#5b6b7a;
+    --linha:#e6edf3; --bg:#f4f7fa; --branco:#fff; --verde:#1f9d55; --ambr:#e0a90c;
+    --verm:#d64550; --roxo:#7a5cd6; --claro:#eef4fb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--tinta);font-size:14px}
+  header{background:linear-gradient(100deg,var(--azul-esc),var(--azul));color:#fff;padding:18px 22px}
+  header h1{margin:0;font-size:20px;font-weight:600}
+  header p{margin:4px 0 0;font-size:13px;opacity:.9}
+  .wrap{padding:18px 22px;max-width:1500px;margin:0 auto}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+  .kpi{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:14px 16px;box-shadow:0 1px 2px rgba(15,34,51,.04)}
+  .kpi .n{font-size:26px;font-weight:700;line-height:1}
+  .kpi .l{font-size:12px;color:var(--cinza);margin-top:6px}
+  .kpi.v .n{color:var(--verde)} .kpi.a .n{color:var(--ambr)} .kpi.r .n{color:var(--verm)} .kpi.b .n{color:var(--azul)} .kpi.p .n{color:var(--roxo)}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  @media(max-width:900px){.charts{grid-template-columns:1fr}}
+  .card{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
+  .card h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--cinza)}
+  .bar-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+  .bar-row .lbl{width:150px;flex-shrink:0;color:var(--tinta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar-row .track{flex:1;background:var(--claro);border-radius:6px;height:16px;overflow:hidden}
+  .bar-row .fill{height:100%;border-radius:6px;background:var(--azul)}
+  .bar-row .val{width:34px;text-align:right;font-variant-numeric:tabular-nums;color:var(--cinza)}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+  .controls input,.controls select{padding:8px 10px;border:1px solid var(--linha);border-radius:8px;font-size:13px;background:#fff;color:var(--tinta)}
+  .controls input[type=search]{min-width:230px;flex:1}
+  .btn{background:var(--azul);color:#fff;border:none;padding:9px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600}
+  .btn:hover{background:var(--azul-esc)}
+  .btn.ghost{background:#fff;color:var(--azul);border:1px solid var(--azul)}
+  .tablewrap{background:#fff;border:1px solid var(--linha);border-radius:10px;overflow:auto}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--linha);white-space:nowrap}
+  th{background:#f8fbfe;position:sticky;top:0;cursor:pointer;user-select:none;font-weight:600;color:var(--cinza)}
+  th:hover{color:var(--azul)}
+  td.hotel{white-space:normal;min-width:200px;font-weight:600}
+  tr:hover td{background:#fafdff}
+  .tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  .s-encerrado{background:#e2f6ea;color:#12813f}
+  .s-golive{background:#e2f6ea;color:#12813f}
+  .s-migracao{background:#e6f1fb;color:#0b6bb3}
+  .s-kickoff{background:#fff4d6;color:#8a6a08}
+  .s-agenda{background:#eef1f4;color:#5b6b7a}
+  .s-novo{background:#efe9fc;color:#5b3fb0}
+  .s-reagendar{background:#fde8d6;color:#a6560c}
+  .s-fase2{background:#e6f1fb;color:#0b6bb3}
+  .s-pausado{background:#f0eef4;color:#6a5b8a}
+  .s-desprior{background:#fdecee;color:#b23440}
+  .s-descartado{background:#f5e6e7;color:#8a2b34}
+  .s-interno{background:#eef1f4;color:#5b6b7a}
+  .prod{font-weight:600}
+  .prod.plus{color:var(--roxo)} .prod.base{color:var(--azul)}
+  .foot{padding:10px 4px;color:var(--cinza);font-size:12px}
+  .count{color:var(--cinza);font-size:13px;margin-left:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Rollout Hunit Plus — Painel de Migração</h1>
+  <p>Responsável: Dieseri Mello · HSystem · Atualizado em 10/07/2026 · Fonte: SenseData (playbooks Migração HUNIT-2.0 e 2.0Plus) + status confirmado da esteira</p>
+  <p><a href="index.html" style="color:#fff;font-weight:600">← Voltar ao Portal Rollout</a></p>
+</header>
+<div class="wrap">
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="charts">
+    <div class="card"><h3>Por status</h3><div id="chartStatus"></div></div>
+    <div class="card"><h3>Por produto / Por rede</h3><div id="chartProd"></div><div id="chartRede" style="margin-top:12px"></div></div>
+  </div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Buscar por hotel, rede, CNPJ, observação...">
+    <select id="fProduto"><option value="">Produto (todos)</option></select>
+    <select id="fStatus"><option value="">Status (todos)</option></select>
+    <select id="fRede"><option value="">Rede (todas)</option></select>
+    <select id="fPms"><option value="">PMS (todos)</option></select>
+    <select id="fResp"><option value="">Responsável (todos)</option></select>
+    <button class="btn ghost" id="clear">Limpar</button>
+    <button class="btn" id="csv">Exportar CSV</button>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="tablewrap">
+    <table id="tbl">
+      <thead><tr>
+        <th data-k="hotel">Hotel</th>
+        <th data-k="rede">Rede</th>
+        <th data-k="produto">Produto</th>
+        <th data-k="status">Status (esteira)</th>
+        <th data-k="fase">Fase</th>
+        <th data-k="pms">PMS</th>
+        <th data-k="venc">Aceite</th>
+        <th data-k="responsavel">Responsável</th>
+        <th data-k="obs">Observação</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="foot">61 hotéis no playbook de rollout (ambiente de teste HSystem excluído). "Status (esteira)" reflete o andamento real acordado; onde não há tratativa individual, usa-se a fase da esteira. "Status SenseData" é o valor bruto do CRM (pode estar defasado).</div>
+</div>
+
+<script>
+const DATA = [
+ {hotel:"Hotel Prata Villaggio",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Go Live",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Reservas travadas no BeeWizard, aguardando dev",cnpj:"02159441000166",id:2160},
+ {hotel:"Hotel Bhally",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-07-09",sd:"Concluída",obs:"Go-live concluído; N3 executado; falta criar grupo WhatsApp",cnpj:"86835592000187",id:554},
+ {hotel:"Wembley Inn",rede:"",produto:"2.0 Plus",status:"Em migração",fase:"Correção N3",pms:"",venc:"2026-06-23",sd:"Atrasada",obs:"Duplicidade Hunit.Booking; cancelamento manual reserva a reserva",cnpj:"03534271000204",id:1888},
+ {hotel:"Brisamar Suite Hotel",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-23",sd:"Concluída",obs:"100% migrado; encerramento confirmado pelo cliente",cnpj:"08197961000140",id:1671},
+ {hotel:"Pousada Luna Zen",rede:"",produto:"2.0",status:"Descartado",fase:"—",pms:"",venc:"2026-06-26",sd:"Concluída",obs:"Desistência do cliente (baixa maturidade)",cnpj:"32913576000136",id:308},
+ {hotel:"Villa Vinicolla",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Cliente sem retorno (alta temporada)",cnpj:"04863712000195",id:641},
+ {hotel:"Chalés Mirante Monte Verde",rede:"",produto:"2.0",status:"Segunda fase",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"Liberou migração; aguardando publicação do Super App",cnpj:"73258130663",id:1427},
+ {hotel:"Kandha",rede:"",produto:"2.0",status:"Pausado",fase:"—",pms:"",venc:"2026-06-29",sd:"Atrasada",obs:"Sem canais conectados; Channel Manager sem uso por ora",cnpj:"11840604603",id:2532},
+ {hotel:"Hotel Recanto da Lagoa",rede:"",produto:"2.0 Plus",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Silêncio total; avalia cancelar o Hcorp",cnpj:"56605752000130",id:1713},
+ {hotel:"Sítio Chalé dos Ipês",rede:"",produto:"2.0",status:"Em migração",fase:"Setup",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Treinamento feito; migração em andamento",cnpj:"83760792634",id:1188},
+ {hotel:"Alma Tropical Resort",rede:"",produto:"2.0",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Go-live; reservas migradas e N3 executado",cnpj:"17887216000113",id:2524},
+ {hotel:"Hotel Independência",rede:"Rede Oliveira",produto:"2.0 Plus",status:"Reagendar",fase:"KickOff",pms:"",venc:"2026-06-25",sd:"Atrasada",obs:"KickOff no-show; reagendar. Potencial rede de 5 hotéis",cnpj:"37147652000163",id:68522},
+ {hotel:"Clareira Cabanas",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"",venc:"2026-06-22",sd:"Atrasada",obs:"Enviar acesso e agendar treinamento",cnpj:"03852421667",id:1544},
+ {hotel:"Chateau do Sossego",rede:"",produto:"2.0",status:"Em migração",fase:"Set Up",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"Lite; Airbnb conectado, HBook em correção",cnpj:"04820688685",id:24072},
+ {hotel:"Aurora e Vale",rede:"",produto:"2.0",status:"Reagendar",fase:"KickOff",pms:"",venc:"2026-06-22",sd:"Atrasada",obs:"KickOff a remarcar",cnpj:"47642479000123",id:1270},
+ {hotel:"Hotel New Point",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"—",venc:"2026-06-23",sd:"Atrasada",obs:"Dados coletados; Booking/HBook, sem PMS ativo",cnpj:"05026743000154",id:48},
+ {hotel:"Hotel Coração Verde",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"",cnpj:"17943046000147",id:948},
+ {hotel:"Camaçari Plaza Hotel",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-29",sd:"Atrasada",obs:"Único da base B2Pay sem HBook",cnpj:"03322045000170",id:415},
+ {hotel:"Brisa do Caitá Praia Hotel",rede:"Rede Brisa",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"Desbravador",venc:"2026-06-30",sd:"Atrasada",obs:"Aguardando homologação do Desbravador",cnpj:"07492326000122",id:1374},
+ {hotel:"Brisa do Mar Praia Hotel",rede:"Rede Brisa",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"Desbravador",venc:"2026-06-30",sd:"Atrasada",obs:"Aguardando Desbravador; KickOff conjunto c/ Caitá",cnpj:"33906660000195",id:1377},
+ {hotel:"RGV Mirante Praia Hotel",rede:"RGV Hotelaria",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-30",sd:"Atrasada",obs:"",cnpj:"52268475000167",id:1197},
+ {hotel:"Himma Hotel",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-30",sd:"Atrasada",obs:"",cnpj:"59957615000153",id:54177},
+ {hotel:"Pousada Beco da Lua",rede:"RGV Hotelaria",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-30",sd:"Atrasada",obs:"",cnpj:"33780813000109",id:793},
+ {hotel:"Pousada Rohsler",rede:"Thrive Group",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"36570630000149",id:2124},
+ {hotel:"Pousada das Pedras",rede:"Thrive Group",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"30119159000190",id:729},
+ {hotel:"Pousada Jardim Monte Verde",rede:"Thrive Group",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"46219912000150",id:728},
+ {hotel:"Cabanas Rohsler",rede:"Thrive Group",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"22192355000162",id:1049},
+ {hotel:"Monakó Cabanas",rede:"Thrive Group",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"42936299000130",id:1803},
+ {hotel:"Bela Vista Beach",rede:"New Time Gestão",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"CNPJ compartilhado c/ Beach Class Muro Alto",cnpj:"60254787000140",id:1524},
+ {hotel:"Beach Class Muro Alto Resort",rede:"New Time Gestão",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"CNPJ compartilhado c/ Bela Vista Beach",cnpj:"60254787000140",id:1060},
+ {hotel:"Hotel Origens",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"34830482000129",id:535},
+ {hotel:"Hotel Fazenda Areia que Canta",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"02776864000125",id:24076},
+ {hotel:"Hotel Mayim Villa",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"30565372000126",id:2548},
+ {hotel:"Pousada Villa Atlântica",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"Desbravador",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando liberação do Desbravador",cnpj:"05419182000153",id:1962},
+ {hotel:"Vila Luna Trancoso",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"HITS ativo; mesmo dono do Solar La Luna",cnpj:"64947763000127",id:144575},
+ {hotel:"Solar La Luna Boutique Hotel",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"HITS ativo (revisar: contava como migração direta)",cnpj:"37336655000145",id:2898},
+ {hotel:"Pousada Stillo Gramado Centro",rede:"Stillo Gramado",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"10971066000182",id:185},
+ {hotel:"Pousada Stillo Gramado Exclusive",rede:"Stillo Gramado",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"21067908000192",id:1316},
+ {hotel:"Porto Minas - Convenções e Lazer",rede:"",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando HITS; usa H-Price (reconfigurar)",cnpj:"03896407000137",id:1191},
+ {hotel:"Pousada Villa Maciel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"26025394000126",id:1986},
+ {hotel:"Vila do Sol Apartamentos",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"20731588000160",id:1648},
+ {hotel:"Vila do Centro Apart Hotel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"48487368000152",id:885},
+ {hotel:"Flat Sol",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"—",venc:"2026-07-03",sd:"Atrasada",obs:"Sem PMS ativo, sem Hcorp; Booking/Expedia/HBook",cnpj:"44402991000104",id:2000},
+ {hotel:"Canto da Floresta Ecoresort",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"19956244000170",id:2112},
+ {hotel:"Pousada Favareto",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"15158332000176",id:136},
+ {hotel:"Benni Palace Hotel",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"61570922000129",id:2912},
+ {hotel:"Benni Hotel Marabá",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"57709886000164",id:2911},
+ {hotel:"Benni Hotel Rio Verde",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"57287288000144",id:2913},
+ {hotel:"Hotel Jaguary & Residence",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"36605755000167",id:3747},
+ {hotel:"Ritter Hotéis",rede:"Rede Versare",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"Desbravador",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"92995398000161",id:1631},
+ {hotel:"Pousada Vigia das Marés",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"19572844000135",id:1203},
+ {hotel:"Tamareiras Park Hotel",rede:"Rede Tamareiras",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"26390880000143",id:2498},
+ {hotel:"Tamareiras Prime Hotel",rede:"Rede Tamareiras",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"26656913000154",id:2497},
+ {hotel:"Hotel Vila Germânica",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-07",sd:"Atrasada",obs:"",cnpj:"97442347000126",id:2417},
+ {hotel:"Pousada Chácara Rio Jordão",rede:"",produto:"2.0 Plus",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-10",sd:"Iniciada",obs:"Recém-adicionado (08/07)",cnpj:"03405913000186",id:697},
+ {hotel:"Hotel Portela III",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-10",sd:"Iniciada",obs:"Recém-adicionado (08/07)",cnpj:"11260073000139",id:1775},
+ {hotel:"Igaras Hotel",rede:"",produto:"2.0 Plus",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-10",sd:"Iniciada",obs:"Recém-adicionado (08/07)",cnpj:"11138866000180",id:421},
+ {hotel:"Cambraia Hotel Arcos",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"45896637000146",id:2440},
+ {hotel:"Hotel Santa Catarina",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"55382792000106",id:1714},
+ {hotel:"Stalo Hotel",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"03514109000135",id:117},
+ {hotel:"Pousada Tropical Vereda",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"62844975000153",id:48743}
+];
+
+// Data de aceite (criação do rollout no SenseData) — substitui o vencimento
+const ACEITE={2160:"2026-05-25",554:"2026-05-26",1888:"2026-05-27",1671:"2026-05-27",308:"2026-05-28",641:"2026-05-28",1427:"2026-06-02",2532:"2026-06-03",1713:"2026-06-08",1188:"2026-06-10",2524:"2026-06-10",68522:"2026-06-11",1544:"2026-06-18",24072:"2026-06-18",1270:"2026-06-19",48:"2026-06-22",948:"2026-06-25",415:"2026-06-26",1374:"2026-06-29",1377:"2026-06-29",1197:"2026-06-29",54177:"2026-06-29",793:"2026-06-29",2124:"2026-06-30",729:"2026-06-30",728:"2026-06-30",1049:"2026-06-30",1803:"2026-06-30",1524:"2026-06-30",1060:"2026-06-30",535:"2026-06-30",24076:"2026-06-30",2548:"2026-07-01",1962:"2026-07-01",144575:"2026-07-01",2898:"2026-07-01",185:"2026-07-01",1316:"2026-07-01",1191:"2026-07-01",1986:"2026-07-02",1648:"2026-07-02",885:"2026-07-02",2000:"2026-07-02",2112:"2026-07-02",136:"2026-07-02",2912:"2026-07-03",2911:"2026-07-03",2913:"2026-07-03",3747:"2026-07-03",1631:"2026-07-03",1203:"2026-07-03",2498:"2026-07-03",2497:"2026-07-03",2417:"2026-07-06",697:"2026-07-08",1775:"2026-07-08",421:"2026-07-08",2440:"2026-07-09",1714:"2026-07-09",117:"2026-07-09",48743:"2026-07-09"};
+// PMS ativo por hotel (cruzado com a base HSystem; só vale IsActivePMSIntegration=true)
+const PMSMAP={948:"HITS",415:"Desbravador",1374:"Desbravador",1377:"Desbravador",1197:"HITS",54177:"Desbravador",793:"HITS",729:"HITS",728:"HITS",1049:"HITS",1803:"HITS",1524:"HITS",1060:"HITS",535:"Desbravador",24076:"Desbravador",2548:"Desbravador",1962:"Desbravador",144575:"HITS",2898:"HITS",185:"HITS",1316:"HITS",1191:"HITS",1986:"HITS",1648:"HITS",885:"HITS",2112:"HITS",136:"HITS",2912:"HITS",2911:"HITS",2913:"HITS",3747:"HITS",1631:"Desbravador",2498:"HITS",2497:"HITS",2417:"Desbravador",697:"HITS",1775:"HITS",421:"Desbravador",2440:"HITS",1714:"HITS",117:"HITS",48743:"HITS"};
+DATA.forEach(d=>{ d.venc = ACEITE[d.id] || d.venc; if(!d.responsavel) d.responsavel="Dieseri"; d.pms = PMSMAP[d.id] || "—"; });
+
+const statusClass = s => ({
+ "Encerrado":"s-encerrado","Go-live":"s-golive","Em migração":"s-migracao","KickOff feito":"s-kickoff",
+ "Em agendamento":"s-agenda","Novo na esteira":"s-novo","Reagendar":"s-reagendar","Segunda fase":"s-fase2",
+ "Pausado":"s-pausado","Despriorizado":"s-desprior","Descartado":"s-descartado","Interno":"s-interno"
+}[s]||"s-agenda");
+
+const $ = s => document.querySelector(s);
+const tbody = $("#tbl tbody");
+let sortKey="venc", sortAsc=true;
+
+function uniq(k){return [...new Set(DATA.map(d=>d[k]).filter(Boolean))].sort()}
+function fillSel(id,k){const el=$(id);uniq(k).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o)})}
+fillSel("#fProduto","produto");fillSel("#fStatus","status");fillSel("#fRede","rede");fillSel("#fPms","pms");fillSel("#fResp","responsavel");
+
+function current(){
+  const q=$("#q").value.toLowerCase().trim();
+  const fp=$("#fProduto").value,fs=$("#fStatus").value,fr=$("#fRede").value,fm=$("#fPms").value,fresp=$("#fResp").value;
+  let rows=DATA.filter(d=>{
+    if(fp&&d.produto!==fp)return false;
+    if(fs&&d.status!==fs)return false;
+    if(fr&&d.rede!==fr)return false;
+    if(fm&&d.pms!==fm)return false;
+    if(fresp&&d.responsavel!==fresp)return false;
+    if(q){const blob=(d.hotel+" "+d.rede+" "+d.produto+" "+d.status+" "+d.fase+" "+d.pms+" "+d.obs+" "+d.cnpj+" "+d.responsavel).toLowerCase();if(!blob.includes(q))return false;}
+    return true;
+  });
+  rows.sort((a,b)=>{let x=(a[sortKey]||""),y=(b[sortKey]||"");return (x>y?1:x<y?-1:0)*(sortAsc?1:-1)});
+  return rows;
+}
+
+function bars(el,counts,color){
+  const max=Math.max(1,...Object.values(counts));
+  el.innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+    `<div class="bar-row"><div class="lbl" title="${k}">${k}</div><div class="track"><div class="fill" style="width:${v/max*100}%;background:${color||'var(--azul)'}"></div></div><div class="val">${v}</div></div>`
+  ).join("");
+}
+function tally(rows,k){const o={};rows.forEach(d=>{const v=d[k]||"—";o[v]=(o[v]||0)+1});return o}
+
+function renderKpis(rows){
+  const c=s=>rows.filter(d=>d.status===s).length;
+  const golive=c("Go-live");
+  const cards=[
+    {n:rows.length,l:"Hotéis (filtro atual)",cls:"b"},
+    {n:golive,l:"Go-live",cls:"v"},
+    {n:c("Em migração"),l:"Em migração",cls:"b"},
+    {n:c("KickOff feito"),l:"KickOff feito",cls:"a"},
+    {n:c("Em agendamento")+c("Novo na esteira")+c("Reagendar"),l:"Em agendamento / novos",cls:"p"},
+    {n:c("Despriorizado")+c("Descartado")+c("Pausado"),l:"Fora de fluxo",cls:"r"}
+  ];
+  $("#kpis").innerHTML=cards.map(k=>`<div class="kpi ${k.cls}"><div class="n">${k.n}</div><div class="l">${k.l}</div></div>`).join("");
+}
+
+function render(){
+  const rows=current();
+  renderKpis(rows);
+  bars($("#chartStatus"),tally(rows,"status"),"var(--azul)");
+  bars($("#chartProd"),tally(rows,"produto"),"var(--roxo)");
+  bars($("#chartRede"),tally(rows.filter(d=>d.rede&&d.rede!=="Interno"),"rede"),"var(--verde)");
+  tbody.innerHTML=rows.map(d=>`<tr>
+    <td class="hotel">${d.hotel}</td>
+    <td>${d.rede||"—"}</td>
+    <td class="prod ${d.produto.includes('Plus')?'plus':'base'}">${d.produto}</td>
+    <td><span class="tag ${statusClass(d.status)}">${d.status}</span></td>
+    <td>${d.fase||"—"}</td>
+    <td>${d.pms||"—"}</td>
+    <td>${d.venc||"—"}</td>
+    <td>${d.responsavel||"—"}</td>
+    <td style="white-space:normal;max-width:320px;color:var(--cinza)">${d.obs||""}</td>
+  </tr>`).join("");
+  $("#count").textContent=rows.length+" de "+DATA.length+" hotéis";
+}
+
+document.querySelectorAll("th").forEach(th=>th.addEventListener("click",()=>{
+  const k=th.dataset.k;if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=true;}render();
+}));
+["#q","#fProduto","#fStatus","#fRede","#fPms","#fResp"].forEach(s=>$(s).addEventListener("input",render));
+$("#clear").addEventListener("click",()=>{$("#q").value="";["#fProduto","#fStatus","#fRede","#fPms","#fResp"].forEach(s=>$(s).value="");render()});
+
+$("#csv").addEventListener("click",()=>{
+  const rows=current();
+  const head=["Hotel","Rede","Produto","Status esteira","Fase","PMS","Aceite","Responsavel","Observacao","CNPJ","ID Cliente"];
+  const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  const lines=[head.map(esc).join(";")];
+  rows.forEach(d=>lines.push([d.hotel,d.rede,d.produto,d.status,d.fase,d.pms,d.venc,d.responsavel,d.obs,d.cnpj,d.id].map(esc).join(";")));
+  const blob=new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8;"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="rollout_hunit_"+new Date().toISOString().slice(0,10)+".csv";a.click();
+});
+
+render();
+</script>
+</body>
+</html>
