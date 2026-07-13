@@ -95,35 +95,36 @@
         <th data-k="hotel">Hotel</th>
         <th data-k="rede">Rede</th>
         <th data-k="produto">Produto</th>
+        <th data-k="omnibees">ID Omnibees</th>
         <th data-k="status">Status (esteira)</th>
         <th data-k="fase">Fase</th>
         <th data-k="pms">PMS</th>
         <th data-k="venc">Aceite</th>
         <th data-k="responsavel">Responsável</th>
-        <th data-k="obs">Observação</th>
+        <th data-k="obs">Pendente</th>
       </tr></thead>
       <tbody></tbody>
     </table>
   </div>
-  <div class="foot">61 hotéis no playbook de rollout (ambiente de teste HSystem excluído). "Status (esteira)" reflete o andamento real acordado; onde não há tratativa individual, usa-se a fase da esteira. "Status SenseData" é o valor bruto do CRM (pode estar defasado).</div>
+  <div class="foot">63 hotéis na esteira de migração (ambiente de teste HSystem excluído). "Status (esteira)" reflete o andamento real acordado; onde não há tratativa individual, usa-se a fase da esteira. "Status SenseData" é o valor bruto do CRM (pode estar defasado).</div>
 </div>
 
 <script>
 const DATA = [
- {hotel:"Hotel Prata Villaggio",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Go Live",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Reservas travadas no BeeWizard, aguardando dev",cnpj:"02159441000166",id:2160},
+ {hotel:"Hotel Prata Villaggio",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Reservas migradas; e-mail N3 Script 2+4 a enviar",cnpj:"02159441000166",id:2160},
  {hotel:"Hotel Bhally",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-07-09",sd:"Concluída",obs:"Go-live concluído; N3 executado; falta criar grupo WhatsApp",cnpj:"86835592000187",id:554},
  {hotel:"Wembley Inn",rede:"",produto:"2.0 Plus",status:"Em migração",fase:"Correção N3",pms:"",venc:"2026-06-23",sd:"Atrasada",obs:"Duplicidade Hunit.Booking; cancelamento manual reserva a reserva",cnpj:"03534271000204",id:1888},
  {hotel:"Brisamar Suite Hotel",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-23",sd:"Concluída",obs:"100% migrado; encerramento confirmado pelo cliente",cnpj:"08197961000140",id:1671},
- {hotel:"Pousada Luna Zen",rede:"",produto:"2.0",status:"Descartado",fase:"—",pms:"",venc:"2026-06-26",sd:"Concluída",obs:"Desistência do cliente (baixa maturidade)",cnpj:"32913576000136",id:308},
- {hotel:"Villa Vinicolla",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Cliente sem retorno (alta temporada)",cnpj:"04863712000195",id:641},
+ {hotel:"Pousada Luna Zen",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-26",sd:"Concluída",obs:"Desistência do cliente (baixa maturidade)",cnpj:"32913576000136",id:308},
+ {hotel:"Villa Vinicolla",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Cliente sem retorno (alta temporada)",cnpj:"04863712000195",id:641},
  {hotel:"Chalés Mirante Monte Verde",rede:"",produto:"2.0",status:"Segunda fase",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"Liberou migração; aguardando publicação do Super App",cnpj:"73258130663",id:1427},
- {hotel:"Kandha",rede:"",produto:"2.0",status:"Pausado",fase:"—",pms:"",venc:"2026-06-29",sd:"Atrasada",obs:"Sem canais conectados; Channel Manager sem uso por ora",cnpj:"11840604603",id:2532},
+ {hotel:"Kandha",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-29",sd:"Atrasada",obs:"Sem canais conectados; Channel Manager sem uso por ora",cnpj:"11840604603",id:2532},
  {hotel:"Hotel Recanto da Lagoa",rede:"",produto:"2.0 Plus",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Silêncio total; avalia cancelar o Hcorp",cnpj:"56605752000130",id:1713},
  {hotel:"Sítio Chalé dos Ipês",rede:"",produto:"2.0",status:"Em migração",fase:"Setup",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Treinamento feito; migração em andamento",cnpj:"83760792634",id:1188},
  {hotel:"Alma Tropical Resort",rede:"",produto:"2.0",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Go-live; reservas migradas e N3 executado",cnpj:"17887216000113",id:2524},
  {hotel:"Hotel Independência",rede:"Rede Oliveira",produto:"2.0 Plus",status:"Reagendar",fase:"KickOff",pms:"",venc:"2026-06-25",sd:"Atrasada",obs:"KickOff no-show; reagendar. Potencial rede de 5 hotéis",cnpj:"37147652000163",id:68522},
  {hotel:"Clareira Cabanas",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"",venc:"2026-06-22",sd:"Atrasada",obs:"Enviar acesso e agendar treinamento",cnpj:"03852421667",id:1544},
- {hotel:"Chateau do Sossego",rede:"",produto:"2.0",status:"Em migração",fase:"Set Up",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"Lite; Airbnb conectado, HBook em correção",cnpj:"04820688685",id:24072},
+ {hotel:"Chateau do Sossego",rede:"",produto:"2.0",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"04820688685",id:24072},
  {hotel:"Aurora e Vale",rede:"",produto:"2.0",status:"Reagendar",fase:"KickOff",pms:"",venc:"2026-06-22",sd:"Atrasada",obs:"KickOff a remarcar",cnpj:"47642479000123",id:1270},
  {hotel:"Hotel New Point",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"—",venc:"2026-06-23",sd:"Atrasada",obs:"Dados coletados; Booking/HBook, sem PMS ativo",cnpj:"05026743000154",id:48},
  {hotel:"Hotel Coração Verde",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"",cnpj:"17943046000147",id:948},
@@ -143,9 +144,9 @@ const DATA = [
  {hotel:"Hotel Origens",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"34830482000129",id:535},
  {hotel:"Hotel Fazenda Areia que Canta",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-01",sd:"Atrasada",obs:"",cnpj:"02776864000125",id:24076},
  {hotel:"Hotel Mayim Villa",rede:"",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"30565372000126",id:2548},
- {hotel:"Pousada Villa Atlântica",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"Desbravador",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando liberação do Desbravador",cnpj:"05419182000153",id:1962},
+ {hotel:"Pousada Villa Atlântica",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"Desbravador",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando liberação do Desbravador",cnpj:"05419182000153",id:1962},
  {hotel:"Vila Luna Trancoso",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"HITS ativo; mesmo dono do Solar La Luna",cnpj:"64947763000127",id:144575},
- {hotel:"Solar La Luna Boutique Hotel",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"HITS ativo (revisar: contava como migração direta)",cnpj:"37336655000145",id:2898},
+ {hotel:"Solar La Luna Boutique Hotel",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"HITS ativo (revisar: contava como migração direta)",cnpj:"37336655000145",id:2898},
  {hotel:"Pousada Stillo Gramado Centro",rede:"Stillo Gramado",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"10971066000182",id:185},
  {hotel:"Pousada Stillo Gramado Exclusive",rede:"Stillo Gramado",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-02",sd:"Atrasada",obs:"",cnpj:"21067908000192",id:1316},
  {hotel:"Porto Minas - Convenções e Lazer",rede:"",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando HITS; usa H-Price (reconfigurar)",cnpj:"03896407000137",id:1191},
@@ -154,7 +155,7 @@ const DATA = [
  {hotel:"Vila do Centro Apart Hotel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"48487368000152",id:885},
  {hotel:"Flat Sol",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"—",venc:"2026-07-03",sd:"Atrasada",obs:"Sem PMS ativo, sem Hcorp; Booking/Expedia/HBook",cnpj:"44402991000104",id:2000},
  {hotel:"Canto da Floresta Ecoresort",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"19956244000170",id:2112},
- {hotel:"Pousada Favareto",rede:"",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"15158332000176",id:136},
+ {hotel:"Pousada Favareto",rede:"",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"15158332000176",id:136},
  {hotel:"Benni Palace Hotel",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"61570922000129",id:2912},
  {hotel:"Benni Hotel Marabá",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"57709886000164",id:2911},
  {hotel:"Benni Hotel Rio Verde",rede:"Benni",produto:"2.0",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"57287288000144",id:2913},
@@ -170,14 +171,22 @@ const DATA = [
  {hotel:"Cambraia Hotel Arcos",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"45896637000146",id:2440},
  {hotel:"Hotel Santa Catarina",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"55382792000106",id:1714},
  {hotel:"Stalo Hotel",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"03514109000135",id:117},
- {hotel:"Pousada Tropical Vereda",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"62844975000153",id:48743}
+ {hotel:"Pousada Tropical Vereda",rede:"",produto:"2.0",status:"Novo na esteira",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Recém-adicionado (09/07)",cnpj:"62844975000153",id:48743},
+ {hotel:"Vento Solar",rede:"",produto:"A definir",status:"KickOff agendado",fase:"—",pms:"",venc:"",sd:"",obs:"",cnpj:"",id:"novo-ventosolar"},
+ {hotel:"Pousada Cantinho Sonhado",rede:"",produto:"A definir",status:"KickOff agendado",fase:"—",pms:"",venc:"",sd:"",obs:"",cnpj:"",id:"novo-cantinho"}
 ];
 
 // Data de aceite (criação do rollout no SenseData) — substitui o vencimento
-const ACEITE={2160:"2026-05-25",554:"2026-05-26",1888:"2026-05-27",1671:"2026-05-27",308:"2026-05-28",641:"2026-05-28",1427:"2026-06-02",2532:"2026-06-03",1713:"2026-06-08",1188:"2026-06-10",2524:"2026-06-10",68522:"2026-06-11",1544:"2026-06-18",24072:"2026-06-18",1270:"2026-06-19",48:"2026-06-22",948:"2026-06-25",415:"2026-06-26",1374:"2026-06-29",1377:"2026-06-29",1197:"2026-06-29",54177:"2026-06-29",793:"2026-06-29",2124:"2026-06-30",729:"2026-06-30",728:"2026-06-30",1049:"2026-06-30",1803:"2026-06-30",1524:"2026-06-30",1060:"2026-06-30",535:"2026-06-30",24076:"2026-06-30",2548:"2026-07-01",1962:"2026-07-01",144575:"2026-07-01",2898:"2026-07-01",185:"2026-07-01",1316:"2026-07-01",1191:"2026-07-01",1986:"2026-07-02",1648:"2026-07-02",885:"2026-07-02",2000:"2026-07-02",2112:"2026-07-02",136:"2026-07-02",2912:"2026-07-03",2911:"2026-07-03",2913:"2026-07-03",3747:"2026-07-03",1631:"2026-07-03",1203:"2026-07-03",2498:"2026-07-03",2497:"2026-07-03",2417:"2026-07-06",697:"2026-07-08",1775:"2026-07-08",421:"2026-07-08",2440:"2026-07-09",1714:"2026-07-09",117:"2026-07-09",48743:"2026-07-09"};
+const ACEITE={2160:"2026-05-25",554:"2026-05-26",1888:"2026-05-27",1671:"2026-05-27",308:"2026-05-28",641:"2026-05-28",1427:"2026-06-02",2532:"2026-06-03",1713:"2026-06-08",1188:"2026-06-10",2524:"2026-06-10",68522:"2026-06-11",1544:"2026-06-18",24072:"2026-06-18",1270:"2026-06-19",48:"2026-06-22",948:"2026-06-25",415:"2026-06-26",1374:"2026-06-29",1377:"2026-06-29",1197:"2026-06-29",54177:"2026-06-29",793:"2026-06-29",2124:"2026-06-30",729:"2026-06-30",728:"2026-06-30",1049:"2026-06-30",1803:"2026-06-30",1524:"2026-06-30",1060:"2026-06-30",535:"2026-06-30",24076:"2026-06-30",2548:"2026-07-01",1962:"2026-07-01",144575:"2026-07-01",2898:"2026-07-01",185:"2026-07-01",1316:"2026-07-01",1191:"2026-07-01",1986:"2026-07-02",1648:"2026-07-02",885:"2026-07-02",2000:"2026-07-02",2112:"2026-07-02",136:"2026-07-02",2912:"2026-07-03",2911:"2026-07-03",2913:"2026-07-03",3747:"2026-07-03",1631:"2026-07-03",1203:"2026-07-03",2498:"2026-07-03",2497:"2026-07-03",2417:"2026-07-06",697:"2026-07-08",1775:"2026-07-08",421:"2026-07-08",2440:"2026-07-09",1714:"2026-07-09",117:"2026-07-09",48743:"2026-07-09","novo-ventosolar":"2026-07-13","novo-cantinho":"2026-07-13"};
 // PMS ativo por hotel (cruzado com a base HSystem; só vale IsActivePMSIntegration=true)
 const PMSMAP={948:"HITS",415:"Desbravador",1374:"Desbravador",1377:"Desbravador",1197:"HITS",54177:"Desbravador",793:"HITS",729:"HITS",728:"HITS",1049:"HITS",1803:"HITS",1524:"HITS",1060:"HITS",535:"Desbravador",24076:"Desbravador",2548:"Desbravador",1962:"Desbravador",144575:"HITS",2898:"HITS",185:"HITS",1316:"HITS",1191:"HITS",1986:"HITS",1648:"HITS",885:"HITS",2112:"HITS",136:"HITS",2912:"HITS",2911:"HITS",2913:"HITS",3747:"HITS",1631:"Desbravador",2498:"HITS",2497:"HITS",2417:"Desbravador",697:"HITS",1775:"HITS",421:"Desbravador",2440:"HITS",1714:"HITS",117:"HITS",48743:"HITS"};
-DATA.forEach(d=>{ d.venc = ACEITE[d.id] || d.venc; if(!d.responsavel) d.responsavel="Dieseri"; d.pms = PMSMAP[d.id] || "—"; });
+// Pendente imediato por hotel (a coluna mostra só o que está pendente)
+const PENDENTE={2160:"Agendar treino do Anderson (Blue Tree)",554:"Criar grupo WhatsApp (Daiana, William, Lu)",1888:"Recriar o hotel do zero e inativar o cadastro antigo (resolve a duplicidade); mensagem de retomada agendada 14/07; agendar treinamento + migração com o Adilson",1671:"—",308:"Despriorizado: cliente repensou e recusou a migração por decisão própria (baixa maturidade nos conceitos). Reavaliar nos próximos lotes",641:"Reengajamento enviado 13/07 (última resposta do Élison foi 11/06, disse que ainda não viu); aguardar retorno",1427:"Aguardar data do Super App",2532:"Despriorizado: hotel sem nenhum canal conectado (Combo, só o motor HBook em uso), Channel Manager sem função agora. Retomar se conectar canais",1713:"Aguardar retorno do cliente",1188:"Acesso enviado; ativar canais (Booking→Airbnb→HBook) e criar as 2 tarifas",2524:"Aguardar N3 (ticket 01606537: correção + reintegração ao B2Pay); ajustar Decolar (ocupação máx.)",68522:"Reagendar KickOff",1544:"Enviar acesso e agendar treinamento",24072:"Enviar e-mail N3 (canal Airbnb + data HBook/Airbnb); definir com Produtos o acesso aos dados de hóspedes",1270:"Reagendar KickOff",48:"Primeiro contato e agendar KickOff",948:"Agendar KickOff",415:"Agendar KickOff",1374:"Aguardar Desbravador; agendar treinamento",1377:"Aguardar Desbravador; agendar treinamento",1197:"Agendar KickOff",54177:"Agendar KickOff",793:"Agendar KickOff",2124:"Agendar KickOff",729:"Agendar KickOff",728:"Agendar KickOff",1049:"Agendar KickOff",1803:"Agendar KickOff",1524:"Agendar KickOff",1060:"Agendar KickOff",535:"Agendar KickOff",24076:"Agendar KickOff",2548:"Agendar KickOff",1962:"Piloto Desbravador em andamento. Configurar a propriedade no novo channel e enviar credenciais de integração à analista do Desbravador; enviar acessos à Heloisa e agendar treinamento + setup; passar a data ao grupo Desbravador",144575:"Aguardar HITS; agendar treinamento",2898:"Aguardar Anderson agendar treino+migração. Respondido ao Maikon (taxas inclusas, pré-pagamento só HBook, tem tarifas). Extras não refletem na integração HBook x HUnit (reserva 7655952731 / id 17700938) — Maikon analisando + alinhar importância com o hotel",185:"Agendar KickOff",1316:"Agendar KickOff",1191:"Aguardar HITS; testar H-Price antes de migrar",1986:"Agendar KickOff",1648:"Agendar KickOff",885:"Agendar KickOff",2000:"Agendar treinamento e migração",2112:"Agendar KickOff",136:"Migração agendada 27/07 15h (treino + migração); aguardar HITS (3º da fila do piloto); rodar script operadoras (madrugada dom→seg)",2912:"Agendar KickOff",2911:"Agendar KickOff",2913:"Agendar KickOff",3747:"Agendar KickOff",1631:"Agendar KickOff",1203:"Agendar KickOff",2498:"Agendar KickOff",2497:"Agendar KickOff",2417:"Agendar KickOff",697:"Agendar KickOff",1775:"Agendar KickOff",421:"Agendar KickOff",2440:"Agendar KickOff",1714:"Agendar KickOff",117:"Agendar KickOff",48743:"Agendar KickOff","novo-ventosolar":"KickOff agendado, realizar (Demo feita pela CS)","novo-cantinho":"KickOff agendado, realizar (Demo feita pela CS)"};
+// ID Omnibees por hotel (usado nas solicitações N3)
+const OMNIMAP={1671:"14245",2524:"22804",1888:"53012",554:"53034",2160:"14435",24072:"53122",641:"53011"};
+// Responsável por hotel (repasse para a equipe); default Dieseri
+const RESPMAP={641:"Gustavo Carlesso"};
+DATA.forEach(d=>{ d.venc = ACEITE[d.id] || d.venc; d.responsavel = RESPMAP[d.id] || "Dieseri"; d.pms = PMSMAP[d.id] || "—"; d.obs = PENDENTE[d.id] || "—"; d.omnibees = OMNIMAP[d.id] || "—"; });
 
 const statusClass = s => ({
  "Encerrado":"s-encerrado","Go-live":"s-golive","Em migração":"s-migracao","KickOff feito":"s-kickoff",
@@ -202,7 +211,7 @@ function current(){
     if(fr&&d.rede!==fr)return false;
     if(fm&&d.pms!==fm)return false;
     if(fresp&&d.responsavel!==fresp)return false;
-    if(q){const blob=(d.hotel+" "+d.rede+" "+d.produto+" "+d.status+" "+d.fase+" "+d.pms+" "+d.obs+" "+d.cnpj+" "+d.responsavel).toLowerCase();if(!blob.includes(q))return false;}
+    if(q){const blob=(d.hotel+" "+d.rede+" "+d.produto+" "+d.omnibees+" "+d.status+" "+d.fase+" "+d.pms+" "+d.obs+" "+d.cnpj+" "+d.responsavel).toLowerCase();if(!blob.includes(q))return false;}
     return true;
   });
   rows.sort((a,b)=>{let x=(a[sortKey]||""),y=(b[sortKey]||"");return (x>y?1:x<y?-1:0)*(sortAsc?1:-1)});
@@ -241,6 +250,7 @@ function render(){
     <td class="hotel">${d.hotel}</td>
     <td>${d.rede||"—"}</td>
     <td class="prod ${d.produto.includes('Plus')?'plus':'base'}">${d.produto}</td>
+    <td>${d.omnibees||"—"}</td>
     <td><span class="tag ${statusClass(d.status)}">${d.status}</span></td>
     <td>${d.fase||"—"}</td>
     <td>${d.pms||"—"}</td>
@@ -259,10 +269,10 @@ $("#clear").addEventListener("click",()=>{$("#q").value="";["#fProduto","#fStatu
 
 $("#csv").addEventListener("click",()=>{
   const rows=current();
-  const head=["Hotel","Rede","Produto","Status esteira","Fase","PMS","Aceite","Responsavel","Observacao","CNPJ","ID Cliente"];
+  const head=["Hotel","Rede","Produto","ID Omnibees","Status esteira","Fase","PMS","Aceite","Responsavel","Pendente","CNPJ","ID Cliente"];
   const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
   const lines=[head.map(esc).join(";")];
-  rows.forEach(d=>lines.push([d.hotel,d.rede,d.produto,d.status,d.fase,d.pms,d.venc,d.responsavel,d.obs,d.cnpj,d.id].map(esc).join(";")));
+  rows.forEach(d=>lines.push([d.hotel,d.rede,d.produto,d.omnibees,d.status,d.fase,d.pms,d.venc,d.responsavel,d.obs,d.cnpj,d.id].map(esc).join(";")));
   const blob=new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
   a.download="rollout_hunit_"+new Date().toISOString().slice(0,10)+".csv";a.click();
