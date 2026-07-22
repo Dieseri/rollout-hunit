@@ -6,44 +6,51 @@
 <title>Rollout Hunit Plus — Painel de Migração</title>
 <style>
   :root{
-    --azul:#0399f8; --azul-esc:#0b6bb3; --tinta:#0f2233; --cinza:#5b6b7a;
-    --linha:#e6edf3; --bg:#f4f7fa; --branco:#fff; --verde:#1f9d55; --ambr:#e0a90c;
+    --azul:#0b7fe6; --azul-esc:#0a5fb0; --tinta:#0f1e2e; --cinza:#647587;
+    --linha:#eaf0f6; --bg:#f1f5f9; --branco:#fff; --verde:#1f9d55; --ambr:#e0a90c;
     --verm:#d64550; --roxo:#7a5cd6; --claro:#eef4fb;
+    --sombra:0 1px 3px rgba(16,30,46,.06),0 1px 2px rgba(16,30,46,.04);
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--tinta);font-size:14px}
-  header{background:linear-gradient(100deg,var(--azul-esc),var(--azul));color:#fff;padding:18px 22px}
-  header h1{margin:0;font-size:20px;font-weight:600}
-  header p{margin:4px 0 0;font-size:13px;opacity:.9}
-  .wrap{padding:18px 22px;max-width:1500px;margin:0 auto}
-  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
-  .kpi{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:14px 16px;box-shadow:0 1px 2px rgba(15,34,51,.04)}
-  .kpi .n{font-size:26px;font-weight:700;line-height:1}
-  .kpi .l{font-size:12px;color:var(--cinza);margin-top:6px}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--tinta);font-size:14px;-webkit-font-smoothing:antialiased}
+  header{background:linear-gradient(105deg,var(--azul-esc),var(--azul));color:#fff;padding:22px 26px;box-shadow:0 2px 14px rgba(11,127,230,.18)}
+  header h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
+  header p{margin:6px 0 0;font-size:12.5px;opacity:.85;max-width:920px}
+  .wrap{padding:20px 26px 44px;max-width:1560px;margin:0 auto}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:18px}
+  .kpi{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;box-shadow:var(--sombra);transition:transform .15s,box-shadow .15s}
+  .kpi:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(16,30,46,.09)}
+  .kpi .n{font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .kpi .l{font-size:12px;color:var(--cinza);margin-top:8px;font-weight:500}
   .kpi.v .n{color:var(--verde)} .kpi.a .n{color:var(--ambr)} .kpi.r .n{color:var(--verm)} .kpi.b .n{color:var(--azul)} .kpi.p .n{color:var(--roxo)}
-  .charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .kpi.big{background:linear-gradient(135deg,var(--azul),var(--azul-esc));border-color:transparent}
+  .kpi.big .n{color:#fff} .kpi.big .l{color:#dceeff}
+  .kpi-note{font-size:11.5px;color:var(--cinza);margin:-8px 0 16px 2px}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
   @media(max-width:900px){.charts{grid-template-columns:1fr}}
-  .card{background:var(--branco);border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
-  .card h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--cinza)}
-  .bar-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+  .card{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:16px 18px;box-shadow:var(--sombra)}
+  .card h3{margin:0 0 14px;font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--cinza);font-weight:700}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
   .bar-row .lbl{width:150px;flex-shrink:0;color:var(--tinta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bar-row .track{flex:1;background:var(--claro);border-radius:6px;height:16px;overflow:hidden}
-  .bar-row .fill{height:100%;border-radius:6px;background:var(--azul)}
-  .bar-row .val{width:34px;text-align:right;font-variant-numeric:tabular-nums;color:var(--cinza)}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-  .controls input,.controls select{padding:8px 10px;border:1px solid var(--linha);border-radius:8px;font-size:13px;background:#fff;color:var(--tinta)}
-  .controls input[type=search]{min-width:230px;flex:1}
-  .btn{background:var(--azul);color:#fff;border:none;padding:9px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600}
+  .bar-row .track{flex:1;background:var(--claro);border-radius:8px;height:18px;overflow:hidden}
+  .bar-row .fill{height:100%;border-radius:8px;background:var(--azul);transition:width .4s}
+  .bar-row .val{width:34px;text-align:right;font-variant-numeric:tabular-nums;color:var(--cinza);font-weight:600}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+  .controls input,.controls select{padding:9px 12px;border:1px solid var(--linha);border-radius:10px;font-size:13px;background:#fff;color:var(--tinta);transition:border-color .15s,box-shadow .15s}
+  .controls input:focus,.controls select:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(11,127,230,.12)}
+  .controls input[type=search]{min-width:240px;flex:1}
+  .btn{background:var(--azul);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-size:13px;cursor:pointer;font-weight:600;transition:background .15s}
   .btn:hover{background:var(--azul-esc)}
   .btn.ghost{background:#fff;color:var(--azul);border:1px solid var(--azul)}
-  .tablewrap{background:#fff;border:1px solid var(--linha);border-radius:10px;overflow:auto}
-  table{border-collapse:collapse;width:100%;font-size:13px}
-  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--linha);white-space:nowrap}
-  th{background:#f8fbfe;position:sticky;top:0;cursor:pointer;user-select:none;font-weight:600;color:var(--cinza)}
+  .tablewrap{background:#fff;border:1px solid var(--linha);border-radius:14px;overflow:visible;box-shadow:var(--sombra)}
+  table{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px;table-layout:fixed}
+  th,td{padding:10px 10px;text-align:left;border-bottom:1px solid var(--linha);vertical-align:top;overflow-wrap:break-word}
+  th{background:#f7fafd;position:sticky;top:0;cursor:pointer;user-select:none;font-weight:600;color:var(--cinza);font-size:11px;text-transform:uppercase;letter-spacing:.2px;box-shadow:inset 0 -1px 0 var(--linha);z-index:2;word-break:normal;overflow-wrap:normal}
   th:hover{color:var(--azul)}
-  td.hotel{white-space:normal;min-width:200px;font-weight:600}
-  tr:hover td{background:#fafdff}
-  .tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  tbody tr:nth-child(even) td{background:#fbfdff}
+  tbody tr:hover td{background:#eef6ff}
+  td.hotel{font-weight:700;color:var(--tinta)}
+  .tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
   .s-encerrado{background:#e2f6ea;color:#12813f}
   .s-golive{background:#e2f6ea;color:#12813f}
   .s-migracao{background:#e6f1fb;color:#0b6bb3}
@@ -51,25 +58,32 @@
   .s-agenda{background:#eef1f4;color:#5b6b7a}
   .s-novo{background:#efe9fc;color:#5b3fb0}
   .s-reagendar{background:#fde8d6;color:#a6560c}
+  .s-demo{background:#e9edfb;color:#3f51b5}
   .s-fase2{background:#e6f1fb;color:#0b6bb3}
   .s-pausado{background:#f0eef4;color:#6a5b8a}
   .s-desprior{background:#fdecee;color:#b23440}
   .s-descartado{background:#f5e6e7;color:#8a2b34}
   .s-interno{background:#eef1f4;color:#5b6b7a}
-  .prod{font-weight:600}
+  .prod{font-weight:700}
   .prod.plus{color:var(--roxo)} .prod.base{color:var(--azul)}
-  .foot{padding:10px 4px;color:var(--cinza);font-size:12px}
-  .count{color:var(--cinza);font-size:13px;margin-left:auto}
+  .foot{padding:14px 4px;color:var(--cinza);font-size:12px}
+  .count{color:var(--cinza);font-size:13px;margin-left:auto;font-weight:600}
+  .obs-cell{color:var(--cinza);cursor:pointer}
+  .obs{line-height:1.5}
+  .obs.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .obs-cell .chev{color:var(--azul);font-size:11px;font-weight:700;margin-left:5px;white-space:nowrap;user-select:none}
+  .obs-cell:hover .obs{color:var(--tinta)}
 </style>
 </head>
 <body>
 <header>
   <h1>Rollout Hunit Plus — Painel de Migração</h1>
-  <p>Responsável: Dieseri Mello · HSystem · Atualizado em 13/07/2026 · Fonte: SenseData (playbooks Migração HUNIT-2.0 e 2.0Plus) + status confirmado da esteira</p>
+  <p>Responsável: Dieseri Mello · HSystem · Atualizado em 22/07/2026 · Fonte: SenseData (playbooks Migração HUNIT-2.0 e 2.0Plus) + status confirmado da esteira</p>
 </header>
 <div class="wrap">
 
   <div class="kpis" id="kpis"></div>
+  <div class="kpi-note">Agendamento (em agendamento/reagendar) · Agendado (demo/kickoff agendado) · Em migração (inclui 2ª fase e kickoff feito) · Go-live. Despriorizados/descartados contam no total, mas não têm card.</div>
 
   <div class="charts">
     <div class="card"><h3>Por status</h3><div id="chartStatus"></div></div>
@@ -92,12 +106,13 @@
 
   <div class="tablewrap">
     <table id="tbl">
+      <colgroup><col style="width:12%"><col style="width:7%"><col style="width:6%"><col style="width:5%"><col style="width:9%"><col style="width:9%"><col style="width:8%"><col style="width:5%"><col style="width:6%"><col style="width:6%"><col style="width:8%"><col style="width:4%"><col style="width:15%"></colgroup>
       <thead><tr>
         <th data-k="hotel">Hotel</th>
         <th data-k="rede">Rede</th>
-        <th data-k="produto">Produto</th>
-        <th data-k="omnibees">ID Omnibees</th>
-        <th data-k="status">Status (esteira)</th>
+        <th data-k="produto">Prod.</th>
+        <th data-k="omnibees">Omni</th>
+        <th data-k="status">Status</th>
         <th data-k="fase">Fase</th>
         <th data-k="pms">PMS</th>
         <th data-k="hprice">H-Price</th>
@@ -110,7 +125,7 @@
       <tbody></tbody>
     </table>
   </div>
-  <div class="foot">74 hotéis (73 migrações + MR Hotel, cliente novo). Ambiente de teste HSystem excluído. "Status (esteira)" reflete o andamento real acordado; onde não há tratativa individual, usa-se a fase da esteira.</div>
+  <div class="foot">97 hotéis (95 migrações + 2 ativações novas: MR Hotel e Chalé Vale Florido). Ambiente de teste HSystem excluído. "Status (esteira)" reflete o andamento real acordado; onde não há tratativa individual, usa-se a fase da esteira.</div>
 </div>
 
 <script>
@@ -121,7 +136,7 @@ const DATA = [
  {hotel:"Brisamar Suite Hotel",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Concluído",pms:"",venc:"2026-06-23",sd:"Concluída",obs:"100% migrado; encerramento confirmado pelo cliente",cnpj:"08197961000140",id:1671},
  {hotel:"Pousada Luna Zen",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-26",sd:"Concluída",obs:"Desistência do cliente (baixa maturidade)",cnpj:"32913576000136",id:308},
  {hotel:"Villa Vinicolla",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Cliente sem retorno (alta temporada)",cnpj:"04863712000195",id:641},
- {hotel:"Chalés Mirante Monte Verde",rede:"",produto:"2.0",status:"Segunda fase",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"Liberou migração; aguardando publicação do Super App",cnpj:"73258130663",id:1427},
+ {hotel:"Chalés Mirante Monte Verde",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"",venc:"2026-06-26",sd:"Atrasada",obs:"Liberou migração; aguardando publicação do Super App",cnpj:"73258130663",id:1427},
  {hotel:"Kandha",rede:"",produto:"2.0",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-29",sd:"Atrasada",obs:"Sem canais conectados; Channel Manager sem uso por ora",cnpj:"11840604603",id:2532},
  {hotel:"Hotel Recanto da Lagoa",rede:"",produto:"2.0 Plus",status:"Despriorizado",fase:"—",pms:"",venc:"2026-06-19",sd:"Atrasada",obs:"Silêncio total; avalia cancelar o Hcorp",cnpj:"56605752000130",id:1713},
  {hotel:"Sítio Chalé dos Ipês",rede:"",produto:"2.0",status:"Em migração",fase:"Setup",pms:"",venc:"2026-06-24",sd:"Atrasada",obs:"Treinamento feito; migração em andamento",cnpj:"83760792634",id:1188},
@@ -156,17 +171,17 @@ const DATA = [
  {hotel:"Porto Minas - Convenções e Lazer",rede:"",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"HITS",venc:"2026-07-02",sd:"Atrasada",obs:"Aguardando HITS; usa H-Price (reconfigurar)",cnpj:"03896407000137",id:1191},
  {hotel:"Pousada Villa Maciel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em migração",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"26025394000126",id:1986},
  {hotel:"Vila do Sol Apartamentos",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em migração",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"20731588000160",id:1648},
- {hotel:"Vila do Centro Apart Hotel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em agendamento",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"48487368000152",id:885},
+ {hotel:"Vila do Centro Apart Hotel",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em migração",fase:"Treino+migração 30/07",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"48487368000152",id:885},
  {hotel:"Pousada Vila do Bosque",rede:"Rede Costa Esmeralda",produto:"2.0 Plus",status:"Em migração",fase:"—",pms:"HITS",venc:"",sd:"",obs:"",cnpj:"07215949000158",id:"novo-viladobosque"},
- {hotel:"Flat Sol",rede:"",produto:"2.0",status:"Reagendar",fase:"KickOff",pms:"—",venc:"2026-07-03",sd:"Atrasada",obs:"Sem PMS ativo, sem Hcorp; Booking/Expedia/HBook",cnpj:"44402991000104",id:2000},
+ {hotel:"Flat Sol",rede:"",produto:"2.0",status:"Em migração",fase:"KickOff",pms:"—",venc:"2026-07-03",sd:"Atrasada",obs:"Sem PMS ativo, sem Hcorp; Booking/Expedia/HBook",cnpj:"44402991000104",id:2000},
  {hotel:"Canto da Floresta Ecoresort",rede:"",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"19956244000170",id:2112},
- {hotel:"Pousada Favareto",rede:"",produto:"2.0 Plus",status:"KickOff feito",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"15158332000176",id:136},
- {hotel:"Benni Palace Hotel",rede:"Benni",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"Whitelabel (Hcorp)",cnpj:"61570922000129",id:2912},
- {hotel:"Benni Hotel Marabá",rede:"Benni",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"",cnpj:"57709886000164",id:2911},
- {hotel:"Benni Hotel Rio Verde",rede:"Benni",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"",cnpj:"57287288000144",id:2913},
- {hotel:"Hotel Jaguary & Residence",rede:"Jaguary Hotéis",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"44 UHs (soma das categorias fecha 40, conferir). Alto volume: 460 reservas/60d, 276 acessos a cartão",cnpj:"36605755000167",id:3747},
+ {hotel:"Pousada Favareto",rede:"",produto:"2.0 Plus",status:"Em migração",fase:"—",pms:"",venc:"2026-07-03",sd:"Atrasada",obs:"",cnpj:"15158332000176",id:136},
+ {hotel:"Benni Palace Hotel",rede:"Benni",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"Whitelabel (Hcorp)",cnpj:"61570922000129",id:2912},
+ {hotel:"Benni Hotel Marabá",rede:"Benni",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"",cnpj:"57709886000164",id:2911},
+ {hotel:"Benni Hotel Rio Verde",rede:"Benni",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"",cnpj:"57287288000144",id:2913},
+ {hotel:"Hotel Jaguary & Residence",rede:"Jaguary Hotéis",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-06",sd:"Concluída",obs:"44 UHs (soma das categorias fecha 40, conferir). Alto volume: 460 reservas/60d, 276 acessos a cartão",cnpj:"36605755000167",id:3747},
  {hotel:"Ritter Hotéis",rede:"Rede Versare",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"Desbravador",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"92995398000161",id:1631},
- {hotel:"Pousada Vigia das Marés",rede:"",produto:"2.0",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"19572844000135",id:1203},
+ {hotel:"Pousada Vigia das Marés",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"19572844000135",id:1203},
  {hotel:"Tamareiras Park Hotel",rede:"Rede Tamareiras",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"26390880000143",id:2498},
  {hotel:"Tamareiras Prime Hotel",rede:"Rede Tamareiras",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-06",sd:"Atrasada",obs:"",cnpj:"26656913000154",id:2497},
  {hotel:"Hotel Vila Germânica",rede:"",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-07",sd:"Atrasada",obs:"",cnpj:"97442347000126",id:2417},
@@ -178,40 +193,63 @@ const DATA = [
  {hotel:"Stalo Hotel",rede:"",produto:"2.0",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"",cnpj:"03514109000135",id:117},
  {hotel:"Pousada Tropical Vereda",rede:"",produto:"2.0",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"",cnpj:"62844975000153",id:48743},
  {hotel:"Vento Solar Adventures",rede:"",produto:"2.0",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"",cnpj:"29073464000100",id:2118},
- {hotel:"Pousada Cantinho Sonhado",rede:"",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-13",sd:"Concluída",obs:"Propriedade e usuário já criados",cnpj:"74196668000192",id:1723},
+ {hotel:"Pousada Cantinho Sonhado",rede:"",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-13",sd:"Concluída",obs:"Propriedade e usuário já criados",cnpj:"74196668000192",id:1723},
  {hotel:"Hotel Mega Polo",rede:"",produto:"2.0 Plus",status:"KickOff agendado",fase:"—",pms:"",venc:"2026-07-14",sd:"Iniciada",obs:"",cnpj:"07569816000180",id:60},
- {hotel:"Hotel Pousada da Neve",rede:"",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-14",sd:"Concluída",obs:"Cliente quer avaliar troca p/ Plus (variação de preço)",cnpj:"90562638000109",id:614},
- {hotel:"Ello Hotel",rede:"",produto:"2.0",status:"KickOff feito",fase:"Treinamento",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Cliente quer ir direto p/ treino e migração",cnpj:"60821735000108",id:45259},
+ {hotel:"Hotel Pousada da Neve",rede:"",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-14",sd:"Concluída",obs:"Cliente quer avaliar troca p/ Plus (variação de preço)",cnpj:"90562638000109",id:614},
+ {hotel:"Ello Hotel",rede:"",produto:"2.0",status:"Em migração",fase:"Treinamento",pms:"",venc:"2026-07-13",sd:"Iniciada",obs:"Cliente quer ir direto p/ treino e migração",cnpj:"60821735000108",id:45259},
  {hotel:"Catavento",rede:"",produto:"2.0",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-15",sd:"Atrasada",obs:"",cnpj:"17660845000106",id:1793},
  {hotel:"Trindade Plaza Hotel",rede:"",produto:"2.0",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-16",sd:"Iniciada",obs:"",cnpj:"11173449000178",id:41},
  {hotel:"Pousada Alcatrazes",rede:"",produto:"2.0 Plus",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-16",sd:"Iniciada",obs:"",cnpj:"03900089000130",id:119328},
  {hotel:"Hotel Aldeia de Sahy",rede:"",produto:"2.0 Plus",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-16",sd:"Iniciada",obs:"Owner no SenseData é a Francielle (CSM), não implantação",cnpj:"46513644000184",id:215},
  {hotel:"AJ Termas Iraí",rede:"UP Hotel Consultoria",produto:"2.0 Plus",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-17",sd:"Iniciada",obs:"Consultoria com mais hotéis; verificar migrar todas",cnpj:"28749006000185",id:1027},
  {hotel:"AJ Hotel Chapecó",rede:"UP Hotel Consultoria",produto:"2.0 Plus",status:"KickOff agendado",fase:"KickOff",pms:"",venc:"2026-07-17",sd:"Iniciada",obs:"Consultoria com mais hotéis; verificar migrar todas",cnpj:"22727222000143",id:1036},
- {hotel:"MR Hotel",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Finalizado",pms:"—",venc:"2026-06-23",sd:"Concluída",obs:"Cliente NOVO HConnect-Hunit, não é migração. Finalizado 23/06",cnpj:"71387336000105",id:"mr-hotel"}
+ {hotel:"MR Hotel",rede:"",produto:"2.0 Plus",status:"Go-live",fase:"Finalizado",pms:"—",venc:"2026-06-23",sd:"Concluída",obs:"Cliente NOVO HConnect-Hunit, não é migração. Finalizado 23/06",cnpj:"71387336000105",id:"mr-hotel"},
+ {hotel:"Chalé Vale Florido",rede:"",produto:"2.0",status:"Go-live",fase:"Finalizado",pms:"—",venc:"",sd:"—",obs:"Nova ativação HConnect-Hunit, não é migração; já em go-live",cnpj:"62235104000132",id:"vale-florido"},
+ {hotel:"Hotel Ilha Branca Inn",rede:"Rede Ilha Branca",produto:"2.0 Plus",status:"Em migração",fase:"Demo CS",pms:"HITS",venc:"2026-07-20",sd:"—",obs:"Demo CS 20/07 11h30. Alto volume: 358 reservas/60d e 363 acessos a cartão",cnpj:"73904245000117",id:"hunit-1774"},
+ {hotel:"Ilha Branca Exclusive",rede:"Rede Ilha Branca",produto:"2.0 Plus",status:"Em migração",fase:"Demo CS",pms:"HITS",venc:"2026-07-20",sd:"—",obs:"Tem HPrice. 107 acessos a cartão/60d",cnpj:"20928257000115",id:"hunit-1775"},
+ {hotel:"Pousada Ilha Branca Centro",rede:"Rede Ilha Branca",produto:"2.0 Plus",status:"Em migração",fase:"Demo CS",pms:"HITS",venc:"2026-07-20",sd:"—",obs:"",cnpj:"12913564000102",id:"hunit-4932"},
+ {hotel:"Hotel Minastur",rede:"",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"HITS",venc:"2026-07-20",sd:"—",obs:"Demo+KickOff no-show 20/07; follow-up 21/07",cnpj:"53401319000195",id:"hunit-759"},
+ {hotel:"Hotel 1948",rede:"",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"HITS",venc:"2026-07-21",sd:"—",obs:"",cnpj:"33263855000164",id:"hunit-1089"},
+ {hotel:"Hotel Mirante do Arvrão",rede:"",produto:"2.0",status:"KickOff feito",fase:"Aguardando Whitelabel",pms:"",venc:"",sd:"Iniciada",obs:"",cnpj:"18675262000111",id:1628},
+ {hotel:"LA Hotel Votuporanga",rede:"",produto:"2.0",status:"KickOff feito",fase:"—",pms:"",venc:"",sd:"Iniciada",obs:"",cnpj:"42893626000114",id:969},
+ {hotel:"Villa Cottage Pousada",rede:"",produto:"2.0",status:"Em migração",fase:"—",pms:"",venc:"",sd:"Iniciada",obs:"",cnpj:"41232449000162",id:1451},
+ {hotel:"Lazuli Hotel Itatiba",rede:"",produto:"2.0",status:"Em migração",fase:"Aguardando B2Pay",pms:"",venc:"",sd:"Iniciada",obs:"",cnpj:"26305597000176",id:248},
+ {hotel:"Pousada Porto Praia",rede:"Grupo Porto Praia",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"15043410000197",id:"hunit-2377"},
+ {hotel:"Pousada Estalagem do Porto",rede:"Grupo Porto Praia",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"35817844000104",id:"hunit-2391"},
+ {hotel:"Pousada Estalagem 11 Suítes",rede:"Grupo Porto Praia",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"35816190000102",id:"hunit-2378"},
+ {hotel:"Pousada Villas Boas",rede:"Grupo Porto Praia",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"08675778000102",id:"hunit-2376"},
+ {hotel:"Pousada Tantomar",rede:"Grupo Porto Praia",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"03537177000209",id:"hunit-1646"},
+ {hotel:"Pousada Fortal Jeri",rede:"",produto:"2.0",status:"Em migração",fase:"Migração 28/07",pms:"",venc:"",sd:"—",obs:"",cnpj:"54099255000182",id:"hunit-3685"},
+ {hotel:"Pousada Quilombo do Tibau",rede:"",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"55249217000121",id:"hunit-4400"},
+ {hotel:"Hotel Costa Norte Ingleses",rede:"Hotéis Costa Norte",produto:"2.0 Plus",status:"Em migração",fase:"Migração 04/08",pms:"",venc:"",sd:"—",obs:"",cnpj:"77894897000179",id:"hunit-57"},
+ {hotel:"Hotéis Costa Norte Ponta das Canas",rede:"Hotéis Costa Norte",produto:"2.0 Plus",status:"Em migração",fase:"Migração 04/08",pms:"",venc:"",sd:"—",obs:"",cnpj:"07115635000183",id:"hunit-59"},
+ {hotel:"Hotel Serra Grande",rede:"",produto:"2.0 Plus",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"10950824000186",id:"hunit-1973"},
+ {hotel:"Rei dos Mares Suítes",rede:"",produto:"2.0",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"05646701000116",id:"hunit-4572"},
+ {hotel:"Hotel Fazenda Parador Maritacas",rede:"",produto:"2.0 Plus",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"07163888000122",id:"hunit-4930"},
+ {hotel:"Village Rio Hotel",rede:"",produto:"2.0 Plus",status:"Demo agendada",fase:"Demo+KickOff",pms:"",venc:"",sd:"—",obs:"",cnpj:"53122121000172",id:"hunit-5093"}
 ];
 
 // Data de aceite (criação do rollout no SenseData) — substitui o vencimento
 const ACEITE={2160:"2026-05-25",554:"2026-05-26",1888:"2026-05-27",1671:"2026-05-27",308:"2026-05-28",641:"2026-05-28",1427:"2026-06-02",2532:"2026-06-03",1713:"2026-06-08",1188:"2026-06-10",2524:"2026-06-10",68522:"2026-06-11",1544:"2026-06-18",24072:"2026-06-18",1270:"2026-06-19",48:"2026-06-22",948:"2026-06-25",415:"2026-06-26",1374:"2026-06-29",1377:"2026-06-29",1197:"2026-06-29",54177:"2026-06-29",793:"2026-06-29",2124:"2026-06-30",729:"2026-06-30",728:"2026-06-30",1049:"2026-06-30",1803:"2026-06-30",1524:"2026-06-30",1060:"2026-06-30",535:"2026-06-30",24076:"2026-06-30",2548:"2026-07-01",1962:"2026-07-01",144575:"2026-07-01",2898:"2026-07-01",185:"2026-07-01",1316:"2026-07-01",1191:"2026-07-01",1986:"2026-07-02",1648:"2026-07-02",885:"2026-07-02",2000:"2026-07-02",2112:"2026-07-02",136:"2026-07-02",2912:"2026-07-03",2911:"2026-07-03",2913:"2026-07-03",3747:"2026-07-03",1631:"2026-07-03",1203:"2026-07-03",2498:"2026-07-03",2497:"2026-07-03",2417:"2026-07-06",697:"2026-07-08",1775:"2026-07-08",421:"2026-07-08",2440:"2026-07-09",1714:"2026-07-09",117:"2026-07-09",48743:"2026-07-09","novo-ventosolar":"2026-07-13","novo-cantinho":"2026-07-13","novo-viladobosque":"2026-07-14"};
 // PMS ativo por hotel (cruzado com a base HSystem; só vale IsActivePMSIntegration=true)
-const PMSMAP={948:"HITS",415:"Desbravador",1374:"Desbravador",1377:"Desbravador",1197:"HITS",54177:"Desbravador",793:"HITS",729:"HITS",728:"HITS",1049:"HITS",1803:"HITS",1524:"HITS",1060:"HITS",535:"Desbravador",24076:"Desbravador",2548:"Desbravador",1962:"Desbravador",144575:"HITS",2898:"HITS",185:"HITS",1316:"HITS",1191:"HITS",1986:"HITS",1648:"HITS",885:"HITS",2112:"HITS",136:"HITS",2912:"HITS",2911:"HITS",2913:"HITS",3747:"HITS",1631:"Desbravador",2498:"HITS",2497:"HITS",2417:"Desbravador",697:"HITS",1775:"HITS",421:"Desbravador",2440:"HITS",1714:"HITS",117:"HITS",48743:"HITS","novo-viladobosque":"HITS",60:"HITS",614:"HITS",45259:"HITS",2118:"HITS",1723:"HITS"};
+const PMSMAP={948:"HITS",415:"Desbravador",1374:"Desbravador",1377:"Desbravador",1197:"HITS",54177:"Desbravador",793:"HITS",729:"HITS",728:"HITS",1049:"HITS",1803:"HITS",1524:"HITS",1060:"HITS",535:"Desbravador",24076:"Desbravador",2548:"Desbravador",1962:"Desbravador",144575:"HITS",2898:"HITS",185:"HITS",1316:"HITS",1191:"HITS",1986:"HITS",1648:"HITS",885:"HITS",2112:"HITS",136:"HITS",2912:"HITS",2911:"HITS",2913:"HITS",3747:"HITS",1631:"Desbravador",2498:"HITS",2497:"HITS",2417:"Desbravador",697:"HITS",1775:"HITS",421:"Desbravador",2440:"HITS",1714:"HITS",117:"HITS",48743:"HITS","novo-viladobosque":"HITS",60:"HITS",614:"HITS",45259:"HITS",2118:"HITS",1723:"HITS","hunit-1774":"HITS","hunit-1775":"HITS","hunit-4932":"HITS","hunit-759":"HITS","hunit-1089":"HITS",1628:"HITS",969:"HITS",1451:"HITS",248:"HITS","hunit-2377":"HITS","hunit-2391":"Desbravador","hunit-2378":"Desbravador","hunit-2376":"Silbeck","hunit-1646":"Desbravador","hunit-3685":"Desbravador","hunit-4400":"HITS","hunit-57":"Desbravador","hunit-59":"Desbravador","hunit-1973":"HITS","hunit-4572":"HITS","hunit-4930":"Hotel Flow Ultra","hunit-5093":"HITS"};
 // Pendente imediato por hotel (a coluna mostra só o que está pendente)
-const PENDENTE={2160:"Agendar treino do Anderson (Blue Tree)",554:"Criar grupo WhatsApp (Daiana, William, Lu)",1888:"Recriar o hotel do zero e inativar o cadastro antigo (resolve a duplicidade); mensagem de retomada agendada 14/07; agendar treinamento + migração com o Adilson",1671:"—",308:"Despriorizado: cliente repensou e recusou a migração por decisão própria (baixa maturidade nos conceitos). Reavaliar nos próximos lotes",641:"Élison sem disponibilidade este mês. Treinamento agendado 10/08 (Gustavo)",1427:"Aguardar data do Super App",2532:"Despriorizado: hotel sem nenhum canal conectado (Combo, só o motor HBook em uso), Channel Manager sem função agora. Retomar se conectar canais",1713:"Aguardar retorno do cliente",1188:"Acesso enviado; ativar canais (Booking→Airbnb→HBook) e criar as 2 tarifas",2524:"Aguardar N3 (ticket 01606537: correção + reintegração ao B2Pay); ajustar Decolar (ocupação máx.)",68522:"Vitor enviou mensagem 14/07 p/ agendar o KickOff, sem retorno do Lucas. Alto volume (982 reservas/60d), priorizar",1544:"Gustavo contatou o Fernando 15/07, aguardando retorno p/ agendar o KickOff. Confirmar dependência do Superapp (pode ir p/ 2ª fase)",24072:"Enviar e-mail N3 (canal Airbnb + data HBook/Airbnb); definir com Produtos o acesso aos dados de hóspedes",1270:"Gustavo contatou 15/07 e 17/07, sem retorno do Daniel. Insistir ou despriorizar",48:"Set Up em andamento (Vitor): propriedade e usuário criados, Booking conectado, migrando reservas. Confirmar go-live e enviar o N3",948:"Agendar KickOff",415:"Agendar KickOff",1374:"Aguardar Desbravador; agendar treinamento",1377:"Aguardar Desbravador; agendar treinamento",1197:"Agendar KickOff",54177:"KickOff 17/07 14h30 com o André (reservas, 5512997206839)",793:"Agendar KickOff",2124:"Agendar KickOff",729:"Agendar KickOff",728:"Agendar KickOff",1049:"Agendar KickOff",1803:"Agendar KickOff",1524:"Agendar KickOff",1060:"Agendar KickOff",535:"Agendar KickOff",24076:"Agendar KickOff",2548:"KickOff + treinamento 20/07 14h com o Tiago (5573981570500)",1962:"Aguardar execução do N3 (Script 2+4, ID 53190). Enviar resumo da call e link do treinamento. Conferir se o Despegar ainda gera warning W20017 (Include Taxes x taxa de turismo de R$4)",144575:"Próximo depois do La Luna: mesmo dono e mesmo usuário, sem treinamento. Criar a estrutura no BeeWizard, vincular o usuário do Anderson e combinar a troca das extranets",2898:"Enviar e-mail N3 Script 2+4 (canal fake→real + data). Postar o lead B2Pay no grupo e avisar o Anderson. Enviar o link do treinamento. Depois: Vila Luna Trancoso. Extras não refletem na integração HBook x HUnit (reserva 7655952731 / id 17700938), Maikon analisando",185:"EM ATRASO: KickOff era 06/07 15h30 e não ocorreu. Reagendar com o Robson (gerente, 5554999519190) — 2 hotéis Stillo juntos",1316:"EM ATRASO: KickOff era 06/07 15h30 e não ocorreu. Reagendar com o Robson (gerente, 5554999519190) — 2 hotéis Stillo juntos",1191:"Aguardar HITS; testar H-Price antes de migrar",1986:"Migração agendada 23/07 10h-12h30 (com Vila do Bosque, treino junto). B2Pay lead a enviar (usa Cicred). H-Price: validar replicação das flutuações",1648:"Migração agendada 24/07 (sexta), treino junto. B2Pay lead (Cicred)",885:"Diego não citou no KickOff (listou Vila do Bosque, Villa Maciel e Vila do Sol como HITS). Confirmar se entra no lote",2000:"KickOff reagendado p/ 20/07 09:15 com o Alencar (5547988223975)",2112:"Felipe pediu reagendamento; KickOff 22/07 15h (marketing e vendas, 5519998488086)",136:"Migração agendada 27/07 15h (treino + migração); aguardar HITS (3º da fila do piloto); rodar script operadoras (madrugada dom→seg)",2912:"KickOff feito 15/07 com a Isabel. Treinamento 21/07. ENVIAR o Script 1 Whitelabel até 20/07 13h",2911:"KickOff feito 15/07 com a Isabel. Treinamento 21/07",2913:"KickOff feito 15/07 com a Isabel. Treinamento 21/07",3747:"KickOff feito 17/07 com o Joel. E-mail de Whitelabel enviado (execução até 27/07). Migração de tarifas 28/07 10h. CONFERIR divergência: 44 UHs informadas x 40 na soma das categorias. HPrice integra a partir de 27/07, depende do Franco. Cliente vai criar grupo de WhatsApp. Lead B2Pay forte (460 reservas/60d, 276 acessos a cartão). REDE: sondar o Jaguary Sumaré (Douglas, 19 99873-8337)",1631:"KickOff 24/07 11h com a Katia (gerente, 5551991735104). Usam Omnibees nas operadoras: comercial deve abordar após a migração",1203:"KickOff 21/07 10h com o Uirá (proprietário, 5548999904114); Gustavo já confirmou o agendamento",2498:"KickOff 23/07 10h com Douglas/Beatriz (reservas, 553433188501) — rede Tamareiras, 2 hotéis",2497:"KickOff 23/07 10h com Douglas/Beatriz (reservas, 553433188501) — rede Tamareiras, 2 hotéis",2417:"KickOff era hoje 14/07 10h com o Thiago (comercial, 5549999340270) — confirmar se ocorreu",697:"KickOff 23/07 10h30 com Odete (chefe recepção) e Hubert (gerente), 5548999129839",1775:"KickOff 29/07 10h com a Gabriela (5517997024744) — já usa Omnibees em outra propriedade",421:"KickOff 07/08 16h30 com a Janice (5549991829310)",2440:"KickOff 07/08 10h com Luis/Cristina (5537988291202)",1714:"KickOff 22/07 10h com o Lucas (dono, 5567981525070)",117:"Cliente não compareceu no KickOff adiantado (16/07). Remarcado p/ 22/07 10h com a Paloma (gerente, 5537988270895)",48743:"KickOff adiantado p/ HOJE 17/07 15h com o Uiliam (5517997342095)",2118:"KickOff 04/08 10h com o Jaime (proprietário, 5547992600156); Gustavo já confirmou",1723:"KickOff feito 16/07 com a Marciele. Propriedade e usuário criados. Treinamento 23/07 10h",60:"KickOff 07/08 11h com a Amanda (gerente, 5511993531505)",614:"KickOff + treino inicial feitos 17/07 com o Pedro. DEFINIR se troca p/ Plus: ele quer lançar variação de preço, não só valor absoluto. Se trocar, refazer o treino no Plus. Hunit ID 2404, canais HBook/Booking/Expedia/HoteisNet",45259:"KickOff feito 16/07. A Andresa quer ir direto p/ treinamento e migração. E-mail de Whitelabel enviado. Treinamento 23/07 14h",1793:"KickOff 04/08 10h30 com o André (proprietário, 5561999592208)",41:"KickOff 07/08 15h30 com a Sibelly Leticya (gerente de reservas, 556231100101)",119328:"KickOff 13/08 11h com a Mara (recepcionista) e o Madson, 5511973291099",215:"KickOff 06/08 15h com a Theodora (proprietária, 5512996443939). Owner no SenseData é a Francielle (CSM), definir quem conduz",1027:"KickOff 05/08 15h com a Emanuela (consultora, 5531972018778) e a Juliana. Verificar se dá p/ migrar todos os hotéis da UP Hotel Consultoria em bloco",1036:"KickOff 05/08 15h com a Emanuela (consultora, 5531972018778), mesma call do AJ Termas Iraí","mr-hotel":"—","novo-viladobosque":"Migração agendada 23/07 10h-12h30 (HITS, com Villa Maciel). Confirmar dados do hotel (ID, CNPJ, produto)"};
+const PENDENTE={2160:"Agendar treino do Anderson (Blue Tree)",554:"Criar grupo WhatsApp (Daiana, William, Lu)",1888:"Recriar o hotel do zero e inativar o cadastro antigo (resolve a duplicidade); mensagem de retomada agendada 14/07; agendar treinamento + migração com o Adilson",1671:"—",308:"Despriorizado: cliente repensou e recusou a migração por decisão própria (baixa maturidade nos conceitos). Reavaliar nos próximos lotes",641:"Élison sem disponibilidade este mês. Treinamento agendado 10/08 (Gustavo)",1427:"Aguardar data do Super App",2532:"Despriorizado: hotel sem nenhum canal conectado (Combo, só o motor HBook em uso), Channel Manager sem função agora. Retomar se conectar canais",1713:"Aguardar retorno do cliente",1188:"Acesso enviado; ativar canais (Booking→Airbnb→HBook) e criar as 2 tarifas",2524:"Aguardar N3 (ticket 01606537: correção + reintegração ao B2Pay); ajustar Decolar (ocupação máx.)",68522:"Vitor enviou mensagem 14/07 p/ agendar o KickOff, sem retorno do Lucas. Alto volume (982 reservas/60d), priorizar",1544:"Gustavo contatou o Fernando 15/07, aguardando retorno p/ agendar o KickOff. Confirmar dependência do Superapp (pode ir p/ 2ª fase)",24072:"Enviar e-mail N3 (canal Airbnb + data HBook/Airbnb); definir com Produtos o acesso aos dados de hóspedes",1270:"Gustavo contatou 15/07 e 17/07, sem retorno do Daniel. Insistir ou despriorizar",48:"Set Up em andamento (Vitor): propriedade e usuário criados, Booking conectado, migrando reservas. Confirmar go-live e enviar o N3",948:"Agendar KickOff",415:"Agendar KickOff",1374:"Aguardar Desbravador; agendar treinamento",1377:"Aguardar Desbravador; agendar treinamento",1197:"Agendar KickOff",54177:"KickOff 17/07 14h30 com o André (reservas, 5512997206839)",793:"Agendar KickOff",2124:"Agendar KickOff",729:"Agendar KickOff",728:"Agendar KickOff",1049:"Agendar KickOff",1803:"Agendar KickOff",1524:"Agendar KickOff",1060:"Agendar KickOff",535:"Agendar KickOff",24076:"Agendar KickOff",2548:"KickOff + treinamento 20/07 14h com o Tiago (5573981570500)",1962:"Aguardar execução do N3 (Script 2+4, ID 53190). Enviar resumo da call e link do treinamento. Conferir se o Despegar ainda gera warning W20017 (Include Taxes x taxa de turismo de R$4)",144575:"Próximo depois do La Luna: mesmo dono e mesmo usuário, sem treinamento. Criar a estrutura no BeeWizard, vincular o usuário do Anderson e combinar a troca das extranets",2898:"Enviar e-mail N3 Script 2+4 (canal fake→real + data). Postar o lead B2Pay no grupo e avisar o Anderson. Enviar o link do treinamento. Depois: Vila Luna Trancoso. Extras não refletem na integração HBook x HUnit (reserva 7655952731 / id 17700938), Maikon analisando",185:"EM ATRASO: KickOff era 06/07 15h30 e não ocorreu. Reagendar com o Robson (gerente, 5554999519190) — 2 hotéis Stillo juntos",1316:"EM ATRASO: KickOff era 06/07 15h30 e não ocorreu. Reagendar com o Robson (gerente, 5554999519190) — 2 hotéis Stillo juntos",1191:"Aguardar HITS; testar H-Price antes de migrar",1986:"Migração agendada 23/07 10h-12h30 (com Vila do Bosque, treino junto). B2Pay lead a enviar (usa Cicred). H-Price: validar replicação das flutuações",1648:"Migração agendada 24/07 (sexta), treino junto. B2Pay lead (Cicred)",885:"Treino+migração 30/07 10h-12h; depende de HITS homologado + adaptação H-Price (prev. qua 23/07). Contato do hotel: Patrícia (Canapini), viladocentro@gmail.com, 47 99708-8846. Rede Costa Esmeralda: seguir separado do lote do Diego.",2000:"KickOff + treino realizados 22/07 à tarde (Alencar, 5547988223975); seguir com a migração",2112:"Felipe pediu reagendamento; KickOff 22/07 15h (marketing e vendas, 5519998488086)",136:"Migração agendada 27/07 15h (treino + migração); aguardar HITS (3º da fila do piloto); rodar script operadoras (madrugada dom→seg)",2912:"KickOff feito 15/07 com a Isabel. Treinamento 21/07. ENVIAR o Script 1 Whitelabel até 20/07 13h",2911:"KickOff feito 15/07 com a Isabel. Treinamento 21/07",2913:"KickOff feito 15/07 com a Isabel. Treinamento 21/07",3747:"KickOff feito 17/07 com o Joel. E-mail de Whitelabel enviado (execução até 27/07). Migração de tarifas 28/07 10h. CONFERIR divergência: 44 UHs informadas x 40 na soma das categorias. HPrice integra a partir de 27/07, depende do Franco. Cliente vai criar grupo de WhatsApp. Lead B2Pay forte (460 reservas/60d, 276 acessos a cartão). REDE: sondar o Jaguary Sumaré (Douglas, 19 99873-8337)",1631:"KickOff 24/07 11h com a Katia (gerente, 5551991735104). Usam Omnibees nas operadoras: comercial deve abordar após a migração",1203:"KickOff 21/07 10h com o Uirá (proprietário, 5548999904114); Gustavo já confirmou o agendamento",2498:"KickOff 23/07 10h com Douglas/Beatriz (reservas, 553433188501) — rede Tamareiras, 2 hotéis",2497:"KickOff 23/07 10h com Douglas/Beatriz (reservas, 553433188501) — rede Tamareiras, 2 hotéis",2417:"KickOff era hoje 14/07 10h com o Thiago (comercial, 5549999340270) — confirmar se ocorreu",697:"KickOff 23/07 10h30 com Odete (chefe recepção) e Hubert (gerente), 5548999129839",1775:"KickOff 29/07 10h com a Gabriela (5517997024744) — já usa Omnibees em outra propriedade",421:"KickOff 07/08 16h30 com a Janice (5549991829310)",2440:"KickOff 07/08 10h com Luis/Cristina (5537988291202)",1714:"KickOff 22/07 10h com o Lucas (dono, 5567981525070)",117:"Cliente não compareceu no KickOff adiantado (16/07). Remarcado p/ 22/07 10h com a Paloma (gerente, 5537988270895)",48743:"KickOff adiantado p/ HOJE 17/07 15h com o Uiliam (5517997342095)",2118:"KickOff 04/08 10h com o Jaime (proprietário, 5547992600156); Gustavo já confirmou",1723:"KickOff feito 16/07 com a Marciele. Propriedade e usuário criados. Treinamento 23/07 10h",60:"KickOff 07/08 11h com a Amanda (gerente, 5511993531505)",614:"KickOff + treino inicial feitos 17/07 com o Pedro. DEFINIR se troca p/ Plus: ele quer lançar variação de preço, não só valor absoluto. Se trocar, refazer o treino no Plus. Hunit ID 2404, canais HBook/Booking/Expedia/HoteisNet",45259:"KickOff feito 16/07. A Andresa quer ir direto p/ treinamento e migração. E-mail de Whitelabel enviado. Treinamento 23/07 14h",1793:"KickOff 04/08 10h30 com o André (proprietário, 5561999592208)",41:"KickOff 07/08 15h30 com a Sibelly Leticya (gerente de reservas, 556231100101)",119328:"KickOff 13/08 11h com a Mara (recepcionista) e o Madson, 5511973291099",215:"KickOff 06/08 15h com a Theodora (proprietária, 5512996443939). Owner no SenseData é a Francielle (CSM), definir quem conduz",1027:"KickOff 05/08 15h com a Emanuela (consultora, 5531972018778) e a Juliana. Verificar se dá p/ migrar todos os hotéis da UP Hotel Consultoria em bloco",1036:"KickOff 05/08 15h com a Emanuela (consultora, 5531972018778), mesma call do AJ Termas Iraí","mr-hotel":"—","vale-florido":"—","hunit-1774":"Vitor conduz. Rede Ilha Branca: as 3 propriedades migram EM BLOCO (Inn, Exclusive, Centro), confirmado. Aguardando retorno do Vitor sobre como ficou a demo de 20/07 com o Johnny (ilhabranca@ilhabranca.com, 2226232525). Agendar KickOff. HITS ativo e Hcorp: Script 1, sem BeeWizard. Tem HPrice. Canais: HBook, Booking, Expedia, Decolar, Hotelbeds, Restel, HoteisNet. Lead B2Pay forte (342 acessos a cartão/60d). Sem atividade no SenseData ainda (demo).","hunit-1775":"Vitor conduz. Rede Ilha Branca, migra em bloco com as outras 2. Mesmo contato (Johnny). TEM HPRICE, depende da adaptação do Franco. HITS ativo e Hcorp. Canais: HBook, Booking, Expedia, Decolar, Airbnb, Hotelbeds, Restel, HoteisNet. Aguardando retorno do Vitor sobre a demo de 20/07. Sem atividade no SenseData ainda (demo).","hunit-4932":"Vitor conduz. Rede Ilha Branca, migra em bloco com as outras 2. Mesmo contato (Johnny). HITS ativo e Hcorp. Canais: HBook, Booking, Expedia, Decolar, Hotelbeds, HoteisNet. Aguardando retorno do Vitor sobre a demo de 20/07. Sem atividade no SenseData ainda (demo).","hunit-759":"Demo+KickOff NÃO realizada 20/07: Letícia não acessou a sala (no-show). Follow-up agendado p/ envio 21/07 manhã, reagendar a Demo+KickOff (agora uma call só). Contato: Letícia (minasturhotel.sse@gmail.com, 5537984077674). HITS ativo e Hcorp: Script 1, sem BeeWizard. Canais: HBook, Booking, Expedia, Airbnb, HoteisNet","novo-viladobosque":"Migração agendada 23/07 10h-12h30 (HITS, com Villa Maciel). Confirmar dados do hotel (ID, CNPJ, produto)","hunit-1089":"Cliente (Amanda) não compareceu na demo 21/07, precisa reagendar a Demo+KickOff e enviar follow-up. Hotel novo de alto volume (217 reservas/60d, 173 acessos a cartão), lead B2Pay forte a enviar. HITS ativo e Hcorp: Script 1, sem BeeWizard. Canais: Booking, HBook, operadoras (HoteisNet). NÃO inserir no SenseData enquanto for demo (pode não querer). Contato: Amanda (gerencia@hotel1948.com.br, 11 96907-4009) e financeiro@hotel1948.com.br.",793:"Gustavo conduz. Demo feita 29/06 com a Sibele (RGV Hotelaria), prontos para migração. Agendar KickOff/treino (etapas atrasadas no SenseData). HITS ativo e Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, HBook, operadoras (HoteisNet). Contato: Sibele (sibelevasconcelos@rgvhotelaria.com.br, 11 99923-4900). Lead B2Pay moderado (38 acessos a cartão/60d).",1628:"Gustavo conduz. KickOff feito. HCorp: e-mail de Whitelabel (Script 1) enviado 21/07, aguardar execução. HITS ativo, sem HPrice. Canais: Booking, Expedia, HBook, operadoras (HoteisNet). Call 01 agendada 30/07. Contato do cadastro: Bianca (reservas@mirantedoarvrao.com.br, 21 99596-0338); na agenda da call apareceu outro contato (recepcaomirantearvrao@gmail.com, 21 99821), confirmar quem conduz. B2Pay não necessário (0 acessos a cartão).",969:"Gustavo conduz. KickOff feito. HITS ativo e Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, Decolar, Airbnb, HBook, operadoras (HoteisNet). Call 01 agendada 29/07. ATENÇÃO: o cliente questionou o Hcorp, diz que perde acesso para ver fichas e alterar markup, alinhar isso. Contato: Leandro (gerencia@lahotelvotuporanga.com.br, 18 99667-8503). Lead B2Pay fraco (20 acessos a cartão).",1451:"Gustavo conduz. KickOff feito. SEM Hcorp: usa BeeWizard (mapeamento manual), não roda Script 1. HITS ativo, sem HPrice. Canais: Booking, Airbnb, HBook. Call 01 agendada 30/07. USA SUPERAPP (4 dias/60d), avaliar 2ª fase se depender do app. 9 UHs, 3 categorias, 1 plano tarifário. Contato: Marta, proprietária (contato@villacottagepousada.com.br, 19 99772-4618). B2Pay não necessário (0 acessos a cartão; já tem HPay no HBook, adquirente Safra).",248:"Vitor conduz. KickOff + treino inicial feitos 20/07 com o Gabriel. Vão seguir com a migração, mas querem resolver pagamentos com o B2Pay antes de iniciar. Enviar lead B2Pay (forte, 190 acessos a cartão/60d). HITS ativo e Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, Decolar, HBook (53 reservas/60d), operadoras (HoteisNet). Contato real: Gabriel (gabriel@lazulihotel.com.br, 11 95265-8581); no cadastro o contato é HS Latam (alemos@hslatam.com). B2Pay é o gate da migração.","hunit-2377":"Grupo Porto Praia (5 pousadas em Arraial do Cabo/RJ; contato Nathalia Alves, comercial@estalagemdoporto.com.br e atendimento@estalagemdoporto.com.br, 22 98174-2795). Demo+KickOff de 20/07 16h NÃO ocorreu (Nathalia não pôde), Dieseri vai contatar e reagendar. Confirmar se as 5 migram em bloco. PMS HITS ativo, SEM Hcorp (BeeWizard, sem Script 1), sem HPrice. Canais: Booking, Expedia, Decolar, Airbnb, HBook. Lead B2Pay forte (143 acessos a cartão/60d).","hunit-2391":"Grupo Porto Praia. Demo+KickOff de 20/07 não ocorreu, reagendar (Nathalia). PMS Desbravador (depende de homologação), SEM Hcorp (BeeWizard), TEM HPrice (depende do Franco). Canais: Booking, Expedia, Decolar, HBook. 85 reservas/60d, 40 acessos a cartão.","hunit-2378":"Grupo Porto Praia. Demo+KickOff de 20/07 não ocorreu, reagendar. PMS Desbravador (homologação), SEM Hcorp (BeeWizard), TEM HPrice. Canais: Booking, Expedia, Decolar, HBook. Baixo volume (44 reservas/60d, 6 acessos a cartão).","hunit-2376":"Grupo Porto Praia. Demo+KickOff de 20/07 não ocorreu, reagendar. PMS Silbeck, SEM Hcorp (BeeWizard), TEM HPrice. Canais: Booking, Expedia, Decolar, HBook. 30 reservas/60d, 20 acessos a cartão.","hunit-1646":"Grupo Porto Praia. Demo+KickOff de 20/07 não ocorreu, reagendar. PMS Desbravador (homologação), SEM Hcorp (BeeWizard), TEM HPrice. Canais: Booking, Expedia, Decolar, HBook. Maior volume do grupo (187 reservas/60d, 76 acessos a cartão).","hunit-3685":"Dieseri conduz. Demo+KickOff feita hoje com a Daniele (usava Hotel Flow, agora Desbravador). Migração agendada terça 28/07 às 14h (reservado 14h-17h; treino 30 min + migração). PMS Desbravador (depende do monitoramento do piloto de integração), com Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, Airbnb, Hotelbeds, HBook, operadoras (HoteisNet). Enviar grupo de WhatsApp + vídeos hoje. B2Pay: passar contato (ela cobra cartão manual; adquirente Stone e HPay no HBook; lead fraco, 4 acessos a cartão/60d). Contato: Daniele Pereira (pousadafortalprea@gmail.com, 85 8794-4330). Alta temporada ago-jan, migrar antes de agosto.","hunit-4400":"Gustavo conduz. Demo+KickOff amanhã 22/07 09:30 com o Adelson Gustavo (adelsongustavo@hotmail.com, 84 99999-9818). SEM Hcorp: BeeWizard, sem Script 1. PMS HITS ativo, sem HPrice. Canais: Booking, Expedia, HBook. Baixo volume (19 reservas/60d), B2Pay não necessário (0 acessos a cartão).","hunit-57":"Dieseri conduz. Demo+KickOff feita 22/07 com o Douglas. MIGRAÇÃO 04/08 (terça), dia inteiro, as 2 propriedades no mesmo dia (Ingleses primeiro, testa, depois Ponta das Canas). PMS Desbravador nativo (aguardar piloto Desbravador estável; monitorando). Com Hcorp: Script 1, sem BeeWizard. NÃO usa HPrice nem HPay (teve e descontinuou). Canais: Booking, Expedia, Decolar, HBook, operadoras (HoteisNet). Enviar vídeos por WhatsApp. B2Pay: passar contato após a migração (lead forte, 164 acessos a cartão/60d; Douglas conhece). Douglas troca os canais na extranet ele mesmo. Owner: Luciano. Contato da call: Douglas. Migração só em agosto porque ele troca o servidor do hotel na semana que vem. Já pode entrar no SenseData (migração confirmada).","hunit-59":"Dieseri conduz. Demo+KickOff feita 22/07 com o Douglas (junto com o Ingleses). MIGRAÇÃO 04/08, mesmo dia do Ingleses, à tarde. PMS Desbravador, com Hcorp: Script 1, sem BeeWizard. Não usa HPrice nem HPay. Canais: Booking, Expedia, Decolar, HBook, operadoras (HoteisNet). Alto volume (266 reservas/60d, ticket R$3.068). Migra em bloco com o Ingleses (04/08). Já pode entrar no SenseData.","hunit-1973":"Demo+KickOff agendada 21/07 10:30 com a Natália Coppo Aresi (natalia@gruposerragrande.com.br, 27 99884-2028), Grupo Serra Grande. PMS HITS ativo, com Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, HBook, operadoras (HoteisNet). ALTO VOLUME: 557 reservas/60d (117 HBook), ticket R$748, leadscore 4,2. B2Pay fraco (10 acessos a cartão). Dieseri conduz (Rei dos Mares foi pro Vitor no mesmo horário).","hunit-4572":"Demo+KickOff agendada 21/07 10:30 com a Ingrid Oliveira. PMS HITS ativo, SEM Hcorp: BeeWizard, sem Script 1. TEM HPrice (depende do Franco). Canais: Booking, Expedia, HBook. 43 reservas/60d, ticket R$1.492. B2Pay não necessário (0 acessos a cartão). Contato do cadastro: Andre Carvalho (andre@easyhoteis.com.br, 11 94226-8122, gestora Easy Hotéis); contato da call é a Ingrid. Vitor conduz (Dieseri fica com o Serra Grande no mesmo horário).","hunit-4930":"Dieseri conduz. Demo+KickOff 21/07. Contato: Alexandre Ferreira (alexandre@hospedarhoteiseviagens.com.br, 24 99929-3449, gestora Hospedar). PMS HOTEL FLOW ULTRA: confirmar com o Gui se a integração cobre a versão Ultra. Com Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, HBook, operadoras (HoteisNet). Premium: ticket R$5.354, diária R$1.980, mas volume baixo (27 reservas/60d). B2Pay não necessário (0 acessos a cartão, já tem HPay no HBook, adquirente Safra).","hunit-5093":"Dieseri conduz. Demo+KickOff 21/07 16:00 com o Diorge Victor (financeiro@villageriohotel.com, 66 9203-3739). PMS HITS ativo, com Hcorp: Script 1, sem BeeWizard. Sem HPrice. Canais: Booking, Expedia, HBook, operadoras (HoteisNet). 65 reservas/60d, ticket R$551. B2Pay não necessário (2 acessos a cartão)."};
 // ID Omnibees por hotel (usado nas solicitações N3)
-const OMNIMAP={1671:"14245",2524:"22804",1888:"53012",554:"53034",2160:"14435",24072:"53122",641:"53011",2898:"53224",1962:"53190"};
+const OMNIMAP={1671:"14245",2524:"22804",1888:"53012",554:"53034",2160:"14435",24072:"53122",641:"53011",2898:"53224",1962:"53190",2000:"53265",1203:"53251",1451:"53247",2911:"53244",1723:"53237",48:"53236",2913:"53232",1188:"53160","mr-hotel":"53052","hunit-3685":"23148",248:"21516","vale-florido":"53148"};
 // Responsável por hotel (repasse para a equipe); default Dieseri
-const RESPMAP={641:"Gustavo Carlesso",68522:"Vitor Vatras",2112:"Gustavo Carlesso",2911:"Vitor Vatras",2912:"Vitor Vatras",2913:"Vitor Vatras",1544:"Gustavo Carlesso",1270:"Gustavo Carlesso",48:"Vitor Vatras",2000:"Gustavo Carlesso",3747:"Gustavo Carlesso",1714:"Gustavo Carlesso",697:"Gustavo Carlesso",1631:"Gustavo Carlesso",1775:"Gustavo Carlesso",2440:"Gustavo Carlesso",421:"Gustavo Carlesso",614:"Vitor Vatras",2498:"Vitor Vatras",2497:"Vitor Vatras",48743:"Vitor Vatras",117:"Vitor Vatras",1203:"Gustavo Carlesso",2118:"Gustavo Carlesso",1723:"Gustavo Carlesso",45259:"Gustavo Carlesso",2548:"Vitor Vatras",215:"Francielle Martin"};
+const RESPMAP={641:"Gustavo Carlesso",68522:"Vitor Vatras",2112:"Gustavo Carlesso",2911:"Vitor Vatras",2912:"Vitor Vatras",2913:"Vitor Vatras",1544:"Gustavo Carlesso",1270:"Gustavo Carlesso",48:"Vitor Vatras",2000:"Gustavo Carlesso",3747:"Gustavo Carlesso",1714:"Gustavo Carlesso",697:"Gustavo Carlesso",1631:"Gustavo Carlesso",1775:"Gustavo Carlesso",2440:"Gustavo Carlesso",421:"Gustavo Carlesso",614:"Vitor Vatras","hunit-1774":"Vitor Vatras","hunit-1775":"Vitor Vatras","hunit-4932":"Vitor Vatras",2498:"Vitor Vatras",2497:"Vitor Vatras",48743:"Vitor Vatras",117:"Vitor Vatras",1203:"Gustavo Carlesso",2118:"Gustavo Carlesso",1723:"Gustavo Carlesso",45259:"Gustavo Carlesso",2548:"Vitor Vatras",215:"Francielle Martin",793:"Gustavo Carlesso",1628:"Gustavo Carlesso",969:"Gustavo Carlesso",1451:"Gustavo Carlesso",248:"Vitor Vatras","hunit-4400":"Gustavo Carlesso","hunit-4572":"Vitor Vatras"};
 // Lead B2Pay por hotel (Enviado = lead mandado ao time B2Pay; Integrado = integração ativa)
-const B2PAYMAP={2160:"Enviado",554:"Enviado",1671:"Integrado",2524:"Integrado",1986:"Enviado",1648:"Enviado","novo-viladobosque":"Enviado",1188:"Não necessário",2898:"Enviado",144575:"Enviado",1962:"Enviado"};
+const B2PAYMAP={2160:"Enviado",554:"Enviado",1671:"Integrado",2524:"Integrado",1986:"Enviado",1648:"Enviado","novo-viladobosque":"Enviado",1188:"Não necessário",2898:"Enviado",144575:"Enviado",1962:"Enviado",885:"Enviado"};
 // H-Price por hotel (cruzado com contratos; Float = HPRICE-FLOAT)
-const HPRICEMAP={68522:"Sim (Float)",948:"Sim",2124:"Sim",729:"Sim",728:"Sim",1049:"Sim",1803:"Sim",24076:"Sim",1191:"Sim",1648:"Sim",885:"Sim",136:"Sim",3747:"Sim",1775:"Sim"};
+const HPRICEMAP={68522:"Sim (Float)",948:"Sim",2124:"Sim",729:"Sim",728:"Sim",1049:"Sim",1803:"Sim",24076:"Sim",1191:"Sim",1648:"Sim",885:"Sim",136:"Sim",3747:"Sim",1775:"Sim","hunit-1775":"Sim","hunit-2391":"Sim","hunit-2378":"Sim","hunit-2376":"Sim","hunit-1646":"Sim","hunit-4572":"Sim"};
 // Usa Superapp (acessos mar/abr/mai 2026 na base; só quem tem registros)
 const SUPERAPPMAP={68522:"Sim",1427:"Sim",2124:"Sim",1270:"Sim",1049:"Sim",1544:"Sim",1714:"Sim",308:"Sim",2524:"Sim",697:"Sim",24076:"Sim"};
 DATA.forEach(d=>{ d.venc = ACEITE[d.id] || d.venc; d.responsavel = RESPMAP[d.id] || "Dieseri"; d.pms = PMSMAP[d.id] || "—"; d.obs = PENDENTE[d.id] || "—"; d.omnibees = OMNIMAP[d.id] || "—"; d.b2pay = B2PAYMAP[d.id] || "—"; d.hprice = HPRICEMAP[d.id] || "—"; d.superapp = SUPERAPPMAP[d.id] || "—"; });
 
 const statusClass = s => ({
  "Encerrado":"s-encerrado","Go-live":"s-golive","Em migração":"s-migracao","KickOff feito":"s-kickoff",
- "Em agendamento":"s-agenda","Novo na esteira":"s-novo","Reagendar":"s-reagendar","Segunda fase":"s-fase2",
+ "Em agendamento":"s-agenda","Novo na esteira":"s-novo","Reagendar":"s-reagendar","Demo agendada":"s-demo","Segunda fase":"s-fase2",
  "Pausado":"s-pausado","Despriorizado":"s-desprior","Descartado":"s-descartado","Interno":"s-interno"
 }[s]||"s-agenda");
 
@@ -249,18 +287,24 @@ function bars(el,counts,color){
 }
 function tally(rows,k){const o={};rows.forEach(d=>{const v=d[k]||"—";o[v]=(o[v]||0)+1});return o}
 
+function kpiBucket(s){
+  if(s==="Go-live"||s==="Encerrado")return"golive";
+  if(s==="Em migração"||s==="Segunda fase"||s==="KickOff feito")return"migracao";
+  if(s==="KickOff agendado"||s==="Demo agendada"||s==="Demo feita")return"agendado";
+  if(s==="Despriorizado"||s==="Descartado"||s==="Pausado"||s==="Interno")return"fora";
+  return"agendamento";
+}
 function renderKpis(rows){
-  const c=s=>rows.filter(d=>d.status===s).length;
-  const golive=c("Go-live");
+  const b={golive:0,migracao:0,agendado:0,agendamento:0,fora:0};
+  rows.forEach(d=>b[kpiBucket(d.status)]++);
   const cards=[
-    {n:rows.length,l:"Hotéis (filtro atual)",cls:"b"},
-    {n:golive,l:"Go-live",cls:"v"},
-    {n:c("Em migração"),l:"Em migração",cls:"b"},
-    {n:c("KickOff feito"),l:"KickOff feito",cls:"a"},
-    {n:c("Em agendamento")+c("Novo na esteira")+c("Reagendar"),l:"Em agendamento / novos",cls:"p"},
-    {n:c("Despriorizado")+c("Descartado")+c("Pausado"),l:"Fora de fluxo",cls:"r"}
+    {n:rows.length,l:"Total de hotéis",cls:"b",big:true},
+    {n:b.agendamento,l:"Agendamento",cls:"p"},
+    {n:b.agendado,l:"Agendado",cls:"a"},
+    {n:b.migracao,l:"Em migração",cls:"b"},
+    {n:b.golive,l:"Go-live",cls:"v"}
   ];
-  $("#kpis").innerHTML=cards.map(k=>`<div class="kpi ${k.cls}"><div class="n">${k.n}</div><div class="l">${k.l}</div></div>`).join("");
+  $("#kpis").innerHTML=cards.map(k=>`<div class="kpi ${k.cls}${k.big?' big':''}"><div class="n">${k.n}</div><div class="l">${k.l}</div></div>`).join("");
 }
 
 function render(){
@@ -282,7 +326,7 @@ function render(){
     <td>${d.venc||"—"}</td>
     <td>${d.responsavel||"—"}</td>
     <td>${d.b2pay||"—"}</td>
-    <td style="white-space:normal;max-width:320px;color:var(--cinza)">${d.obs||""}</td>
+    <td class="obs-cell">${d.obs?`<span class="obs clamp">${d.obs}</span>${d.obs.length>55?'<span class="chev">▾ ver</span>':''}`:'—'}</td>
   </tr>`).join("");
   $("#count").textContent=rows.length+" de "+DATA.length+" hotéis";
 }
@@ -292,6 +336,7 @@ document.querySelectorAll("th").forEach(th=>th.addEventListener("click",()=>{
 }));
 ["#q","#fProduto","#fStatus","#fRede","#fPms","#fResp","#fB2pay","#fHprice"].forEach(s=>$(s).addEventListener("input",render));
 $("#clear").addEventListener("click",()=>{$("#q").value="";["#fProduto","#fStatus","#fRede","#fPms","#fResp","#fB2pay","#fHprice"].forEach(s=>$(s).value="");render()});
+tbody.addEventListener("click",e=>{const cell=e.target.closest(".obs-cell");if(!cell)return;const o=cell.querySelector(".obs");if(!o)return;o.classList.toggle("clamp");const ch=cell.querySelector(".chev");if(ch)ch.textContent=o.classList.contains("clamp")?"▾ ver":"▴ menos";});
 
 $("#csv").addEventListener("click",()=>{
   const rows=current();

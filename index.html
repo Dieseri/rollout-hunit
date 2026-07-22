@@ -48,6 +48,57 @@ tr:hover td{background:var(--surface2)}
 .canal-status.pendente{background:rgba(239,68,68,.15);color:var(--red)}
 #theme-toggle{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:.85em;font-family:inherit;font-weight:500;transition:all .2s;white-space:nowrap;flex-shrink:0}
 #theme-toggle:hover{background:var(--surface3);color:var(--text)}
+/* ===== Sumário Executivo ===== */
+.sum-hero{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 18px;flex:1;min-width:135px}
+.stat .n{font-size:1.75em;font-weight:700;color:var(--text);line-height:1}
+.stat .l{font-size:.8em;color:var(--text2);margin-top:6px}
+.stat.green .n{color:var(--green)}.stat.blue .n{color:var(--accent)}.stat.orange .n{color:var(--orange)}.stat.red .n{color:var(--red)}.stat.purple .n{color:var(--accent2)}
+.funnel{display:flex;flex-wrap:wrap;gap:10px}
+.funnel .step{flex:1;min-width:120px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.funnel .step .n{font-size:1.55em;font-weight:700;color:var(--text)}
+.funnel .step .l{font-size:.8em;color:var(--text2);margin-top:4px}
+.funnel .step.green .n{color:var(--green)}.funnel .step.blue .n{color:var(--accent)}.funnel .step.orange .n{color:var(--orange)}.funnel .step.gray .n{color:var(--text3)}.funnel .step.red .n{color:var(--red)}.funnel .step.purple .n{color:var(--accent2)}
+.arrow{align-self:center;color:var(--text3);font-size:1.5em;font-weight:700;flex:0 0 auto;padding:0 2px}
+@media(max-width:768px){.arrow{display:none}}
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.sum-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+.sum-block h4{color:var(--accent);font-size:1.02em;margin-bottom:2px}
+.sum-block .sub{color:var(--text3);font-size:.82em;margin-bottom:12px}
+.mini{width:100%;border-collapse:collapse;font-size:.86em;background:transparent;border-radius:0}
+.mini td{padding:6px 4px;border-bottom:1px solid var(--border);color:var(--text2);background:transparent}
+.mini td.r{text-align:right;white-space:nowrap;color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+.mini tr:last-child td{border-bottom:none}
+.mini tr:hover td{background:transparent}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.74em;font-weight:700;white-space:nowrap}
+.pill.ok{background:rgba(34,197,94,.15);color:var(--green)}
+.pill.hom{background:rgba(234,179,8,.15);color:var(--yellow)}
+.pill.dev{background:rgba(249,115,22,.15);color:var(--orange)}
+.pill.block{background:rgba(239,68,68,.15);color:var(--red)}
+.pill.eval{background:rgba(91,114,245,.15);color:var(--accent)}
+.pill.piloto{background:rgba(20,184,166,.15);color:var(--teal)}
+.pill.teste{background:rgba(234,179,8,.15);color:var(--yellow)}
+.pill.agend{background:rgba(124,58,237,.15);color:var(--accent2)}
+.pill.prox{background:var(--surface3);color:var(--text3)}
+.mini tr.h td{color:var(--text3);font-weight:700;font-size:.82em;border-bottom-color:var(--border2)}
+.pms-table{margin-top:8px}
+.pms-table th{font-size:.84em;padding:9px 10px}
+.pms-table td{font-size:.9em;padding:9px 10px;color:var(--text2)}
+.pms-table td.r,.pms-table th.r{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--text);font-weight:600}
+.pms-table td.name{color:var(--text);font-weight:600}
+.blk .imp{color:var(--text2);font-size:.82em;margin-top:3px}
+.blk{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.9em;align-items:flex-start}
+.blk:last-child{border-bottom:none}
+.blk .num{flex-shrink:0;width:26px;height:26px;border-radius:7px;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82em;color:var(--text2)}
+.blk .txt{color:var(--text)}
+.blk .who{color:var(--text3);font-size:.86em}
+.blk.hit .num{background:rgba(239,68,68,.2);color:var(--red)}
+.blk.hit .who{color:var(--red)}
+.tab-archive{position:relative}
+.tab-archive>summary{list-style:none;cursor:pointer;background:var(--surface);border:1px dashed var(--border2);padding:10px 18px;border-radius:8px;font-size:.9em;font-weight:600;color:var(--text2)}
+.tab-archive>summary::-webkit-details-marker{display:none}
+.tab-archive>summary:hover,.tab-archive[open]>summary{color:var(--text)}
+.archive-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px}
 @media(max-width:768px){.container{padding:10px}header{padding:16px}h1{font-size:1.5em}.nav-tabs{gap:5px}.tab-button{padding:8px 13px;font-size:.82em}.card,.flow-section{padding:13px}table{font-size:.82em}th,td{padding:9px 7px}.tooltip .tooltiptext{width:230px;margin-left:-115px}.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}div[style*="grid-template-columns"]{display:block!important}div[style*="grid-template-columns"]>div{margin-bottom:10px}}
 @media(max-width:480px){h1{font-size:1.3em}.tab-button{padding:7px 10px;font-size:.78em}.card,.flow-section{padding:10px}table{font-size:.75em}th,td{padding:7px 5px}}
 /* Dark-theme patches */
@@ -74,18 +125,218 @@ tr:hover td{background:var(--surface2)}
         </header>
 
         <div class="nav-tabs">
-            <button class="tab-button active" data-tab="cronograma">📅 Cronograma</button>
-            <button class="tab-button" data-tab="viabilidade">📊 Viabilidade Técnica</button>
-            <button class="tab-button" data-tab="fluxos">🔄 Fluxo de Rollout</button>
-            <button class="tab-button" data-tab="canais">📡 Canais</button>
-            <button class="tab-button" data-tab="pms">🏨 PMS</button>
-            <button class="tab-button" data-tab="centralone">🏢 Central One</button>
-            <button class="tab-button" data-tab="requisitos">✅ Requisitos</button>
-            <a href="execucao.html" class="tab-button" style="text-decoration:none;display:inline-block">📋 Execução</a>
+            <button class="tab-button active" data-tab="sumario">📊 Sumário Executivo</button>
+            <button class="tab-button" data-tab="execucao">📋 Execução</button>
+            <details class="tab-archive">
+                <summary>🗂️ Abas técnicas (detalhes) ▾</summary>
+                <div class="archive-tabs">
+                    <button class="tab-button" data-tab="cronograma">📅 Cronograma</button>
+                    <button class="tab-button" data-tab="viabilidade">📊 Viabilidade Técnica</button>
+                    <button class="tab-button" data-tab="fluxos">🔄 Fluxo de Rollout</button>
+                    <button class="tab-button" data-tab="canais">📡 Canais</button>
+                    <button class="tab-button" data-tab="pms">🏨 PMS</button>
+                    <button class="tab-button" data-tab="centralone">🏢 Central One</button>
+                    <button class="tab-button" data-tab="requisitos">✅ Requisitos</button>
+                </div>
+            </details>
+        </div>
+
+        <!-- SUMÁRIO EXECUTIVO -->
+        <div id="sumario" class="tab-content active">
+
+            <div class="alert alert-info" style="margin-bottom:18px">
+                <strong>📊 Sumário Executivo</strong> — visão consolidada da migração HSystem → Omnibees.
+                Base total de <strong>2.170 hotéis</strong> (fonte HSystem, 20/07/2026) · esteira de rollout ativa com <strong>97 hotéis</strong> (relatório 22/07/2026).
+            </div>
+
+            <!-- Fluxo geral -->
+            <div class="sum-hero">
+                <div class="stat blue"><div class="n">2.170</div><div class="l">Base total</div></div>
+                <div class="arrow">→</div>
+                <div class="stat purple"><div class="n">608</div><div class="l">Abordados (piloto)</div></div>
+                <div class="arrow">→</div>
+                <div class="stat"><div class="n">97</div><div class="l">Na esteira</div></div>
+                <div class="arrow">→</div>
+                <div class="stat orange"><div class="n">33</div><div class="l">Em migração</div></div>
+                <div class="arrow">→</div>
+                <div class="stat green"><div class="n">10</div><div class="l">Go-live</div></div>
+            </div>
+
+            <!-- Abordados: Piloto Rollout -->
+            <div class="card">
+                <h3>📣 Hotéis abordados — Piloto Rollout · 608</h3>
+                <div class="funnel">
+                    <div class="step blue"><div class="n">194</div><div class="l">Lite · Sem PMS</div></div>
+                    <div class="step orange"><div class="n">38</div><div class="l">Lite · Desbravador</div></div>
+                    <div class="step green"><div class="n">191</div><div class="l">Lite · HITS</div></div>
+                    <div class="step blue"><div class="n">17</div><div class="l">Plus · Sem PMS</div></div>
+                    <div class="step orange"><div class="n">41</div><div class="l">Plus · Desbravador</div></div>
+                    <div class="step green"><div class="n">127</div><div class="l">Plus · HITS</div></div>
+                </div>
+            </div>
+
+            <!-- Funil da esteira -->
+            <div class="card">
+                <h3>🚀 Funil da migração — esteira atual (97 hotéis)</h3>
+                <div class="funnel">
+                    <div class="step purple"><div class="n">17</div><div class="l">Agendamento<br><span style="font-size:.85em;color:var(--text3)">(em agendamento/reagendar)</span></div></div>
+                    <div class="step orange"><div class="n">34</div><div class="l">Agendado<br><span style="font-size:.85em;color:var(--text3)">(demo/kickoff agendado)</span></div></div>
+                    <div class="step blue"><div class="n">33</div><div class="l">Em migração<br><span style="font-size:.85em;color:var(--text3)">(inclui 2ª fase e kickoff feito)</span></div></div>
+                    <div class="step green"><div class="n">10</div><div class="l">Go-live</div></div>
+                </div>
+                <p style="color:var(--text3);font-size:.84em;margin-top:12px">Despriorizados/descartados (3) contam no total, mas não têm etapa. Detalhamento hotel a hotel na aba <strong>Execução</strong>.</p>
+            </div>
+
+            <!-- PMS -->
+            <div class="card">
+                <h3>🏨 PMS — 10 principais</h3>
+                <p style="color:var(--text3);font-size:.85em;margin:-6px 0 4px">1.919 hotéis com PMS ativo · 251 sem PMS (liberados p/ rollout imediato). <strong>Total</strong> = base · <strong>Migrados</strong> = já em go-live · <strong>Na esteira</strong> = no lote atual.</p>
+                <div class="table-responsive"><table class="pms-table">
+                    <thead><tr><th>PMS</th><th class="r">Total</th><th class="r">Migrados</th><th class="r">Na esteira</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td class="name">HITS</td><td class="r">387</td><td class="r">1</td><td class="r">51</td><td><span class="pill piloto">Piloto</span></td></tr>
+                        <tr><td class="name">Hospedin</td><td class="r">357</td><td class="r">0</td><td class="r">0</td><td><span class="pill dev">Em desenvolvimento</span></td></tr>
+                        <tr><td class="name">Hotelflow</td><td class="r">210</td><td class="r">0</td><td class="r">0</td><td><span class="pill teste">Em teste</span></td></tr>
+                        <tr><td class="name">TDF</td><td class="r">159</td><td class="r">0</td><td class="r">0</td><td><span class="pill dev">Em desenvolvimento</span></td></tr>
+                        <tr><td class="name">Silbeck</td><td class="r">136</td><td class="r">0</td><td class="r">1</td><td><span class="pill eval">Em análise</span></td></tr>
+                        <tr><td class="name">Desbravador</td><td class="r">105</td><td class="r">1</td><td class="r">17</td><td><span class="pill piloto">Piloto</span></td></tr>
+                        <tr><td class="name">BitzSoftware</td><td class="r">94</td><td class="r">0</td><td class="r">0</td><td><span class="pill agend">Agendamento</span></td></tr>
+                        <tr><td class="name">Queops</td><td class="r">92</td><td class="r">0</td><td class="r">0</td><td><span class="pill agend">Agendamento</span></td></tr>
+                        <tr><td class="name">HMax</td><td class="r">91</td><td class="r">0</td><td class="r">0</td><td><span class="pill eval">Em análise</span></td></tr>
+                        <tr><td class="name">Xenios</td><td class="r">21</td><td class="r">0</td><td class="r">0</td><td><span class="pill agend">Agendamento</span></td></tr>
+                        <tr><td class="name">Demais PMS</td><td class="r">267</td><td class="r">0</td><td class="r">1</td><td><span class="pill prox">Próximas abordagens</span></td></tr>
+                        <tr><td class="name">Sem PMS</td><td class="r">251</td><td class="r">8</td><td class="r">27</td><td><span class="pill ok">Rollout imediato</span></td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+
+            <div class="sum-grid">
+
+                <!-- Superapp -->
+                <div class="sum-block">
+                    <h4>📱 Superapp</h4>
+                    <div class="sub">Acessos nos últimos 60 dias</div>
+                    <table class="mini">
+                        <tr><td>Hotéis impactados (base) <span class="pill block">Bloqueado</span></td><td class="r">262</td></tr>
+                        <tr><td>Na esteira atual</td><td class="r">11</td></tr>
+                    </table>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:10px">App oficial Omnibees não publicado (Apple Store com recusas). Previsão: <strong>fim de agosto/2026</strong>. Os 11 hotéis da esteira foram movidos para a 2ª fase — sem impacto no cronograma geral.</p>
+                </div>
+
+                <!-- HPrice -->
+                <div class="sum-block">
+                    <h4>💲 HPrice / BeePrice</h4>
+                    <div class="sub">Hotéis com HPrice contratado</div>
+                    <table class="mini">
+                        <tr><td>Hotéis impactados (base) <span class="pill hom">Em análise</span></td><td class="r">479</td></tr>
+                        <tr><td>Na esteira atual</td><td class="r">20</td></tr>
+                    </table>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:10px">Interface HPRICE/BeePrice ✅ finalizada. Bloqueador em aberto: <strong>BAR incompatível</strong> (regra de tarifa) — validar replicação das flutuações antes de migrar.</p>
+                </div>
+
+                <!-- HBook / Extras -->
+                <div class="sum-block">
+                    <h4>🧩 HBook / Extras</h4>
+                    <div class="sub">Motor de reservas e módulos</div>
+                    <table class="mini">
+                        <tr class="h"><td>Item</td><td class="r">Base</td><td class="r">Esteira</td></tr>
+                        <tr><td>Hotéis com HBook</td><td class="r">1.927</td><td class="r">93</td></tr>
+                        <tr><td>Extras Hbook ativos <span class="pill block">Sem previsão</span></td><td class="r">196</td><td class="r">0</td></tr>
+                        <tr><td>HPay via HBook <span class="pill ok">Finalizado</span></td><td class="r">914</td><td class="r">—</td></tr>
+                    </table>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:10px">PartnersAPI (CPF, parcelamento, HPay) ✅ finalizada. <strong>Extras</strong> depende da API de mapeamentos da Omnibees — sem previsão (não entra nas Metas 3/4).</p>
+                </div>
+
+                <!-- Canais -->
+                <div class="sum-block">
+                    <h4>📡 Canais de distribuição</h4>
+                    <div class="sub">Hotéis com o canal conectado (base)</div>
+                    <table class="mini">
+                        <tr><td>Booking <span class="pill ok">Liberado</span></td><td class="r">2.100</td></tr>
+                        <tr><td>Expedia <span class="pill ok">Liberado</span></td><td class="r">1.598</td></tr>
+                        <tr><td>HotéisNet <span class="pill ok">Migração automatizada</span></td><td class="r">1.342</td></tr>
+                        <tr><td>Airbnb V2 <span class="pill dev">Downgrade ocupação→quarto</span></td><td class="r">693</td></tr>
+                        <tr><td>Decolar</td><td class="r">673</td></tr>
+                        <tr><td>Hotelbeds / HRS / Restel / demais</td><td class="r">277</td></tr>
+                    </table>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:10px">Todos migram pela Machine Account existente da Omnibees. Acesso aos portais OTA ✅ concluído.</p>
+                </div>
+
+                <!-- Timeout do token -->
+                <div class="sum-block">
+                    <h4>⏱️ Timeout do token (12h)</h4>
+                    <div class="sub">Bug ativo em produção</div>
+                    <p style="color:var(--text2);font-size:.9em">Ao expirar o token (12h), o sistema dá timeout e redireciona o usuário para a Omnibees em vez de manter no ambiente HSystem.</p>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:8px">Impactou todos os hotéis em go-live (10).</p>
+                </div>
+
+                <!-- BeeWizard -->
+                <div class="sum-block">
+                    <h4>🧙 BeeWizard — migração de reservas/dados</h4>
+                    <div class="sub">Entregue na quinta (16/07)</div>
+                    <p style="color:var(--text2);font-size:.9em">Precisou de ajustes na migração de reservas e refatoração da migração de dados.</p>
+                    <p style="color:var(--text3);font-size:.82em;margin-top:8px">Impactou todos os hotéis em go-live (10) · atrasou a esteira.</p>
+                </div>
+
+                <!-- Fila de integração -->
+                <div class="sum-block">
+                    <h4>🔗 Fila de integração travada</h4>
+                    <div class="sub">Reservas não integram com o PMS</div>
+                    <p style="color:var(--text2);font-size:.9em">Solar La Luna (HITS) · Villa Atlântica (Desbravador) · 2 em go-live.</p>
+                    <p style="color:var(--text3);font-size:.82em;margin:8px 0 6px">Parou também os demais hotéis em migração com PMS:</p>
+                    <table class="mini">
+                        <tr><td>HITS</td><td class="r">17</td></tr>
+                        <tr><td>Desbravador</td><td class="r">3</td></tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Bloqueadores / registros -->
+            <div class="card">
+                <h3>⚠️ Bloqueadores e registros (6)</h3>
+                <div class="blk"><div class="num">1</div><div>
+                    <div class="txt">Telefone do hóspede não é informado ao usuário</div>
+                    <div class="who">Dado é enviado na integração, mas não exibido · questionado no Teams 13/07 · ticket aberto 21/07</div>
+                    <div class="imp">Impacta todos · 10 em go-live</div>
+                </div></div>
+                <div class="blk hit"><div class="num">2</div><div>
+                    <div class="txt">Direcionamento do Bee2Pay no Lite</div>
+                    <div class="who">Liberado em 16/07 (quinta)</div>
+                    <div class="imp">Impactou 2 hotéis (Lite)</div>
+                </div></div>
+                <div class="blk"><div class="num">3</div><div>
+                    <div class="txt">Impressão de reservas no Lite não funciona</div>
+                    <div class="who">Em tratamento com o time IDT</div>
+                    <div class="imp">Impacta todos (perfil Lite)</div>
+                </div></div>
+                <div class="blk"><div class="num">4</div><div>
+                    <div class="txt">Airbnb — downgrade de ocupação para por quarto</div>
+                    <div class="who">Atinge todo hotel que tinha Airbnb V2</div>
+                    <div class="imp">Impacta 693 (base) · 20 na esteira · 3 em go-live</div>
+                </div></div>
+                <div class="blk"><div class="num">5</div><div>
+                    <div class="txt">HPrice — regra BAR incompatível</div>
+                    <div class="who">Atinge hotéis com HPrice · validar replicação das flutuações antes de migrar</div>
+                    <div class="imp">Impacta 479 (base) · 20 na esteira · 0 em go-live</div>
+                </div></div>
+                <div class="blk"><div class="num">6</div><div>
+                    <div class="txt">Cloudflare nega a autenticação na 1ª tentativa</div>
+                    <div class="who">A primeira tentativa de login é bloqueada; na tentativa seguinte libera normalmente</div>
+                    <div class="imp">Impacta todos</div>
+                </div></div>
+            </div>
+
+        </div>
+
+        <!-- EXECUÇÃO -->
+        <div id="execucao" class="tab-content">
+            <iframe id="execucao-frame" src="execucao.html" title="Painel de Execução"
+                style="width:100%;border:none;min-height:600px;background:#f4f7fa;border-radius:8px"></iframe>
         </div>
 
         <!-- CRONOGRAMA -->
-        <div id="cronograma" class="tab-content active">
+        <div id="cronograma" class="tab-content">
             <div class="card">
                 <h3>📅 Cronograma</h3>
                 <div style="overflow-x: auto;">
@@ -1988,6 +2239,30 @@ function toggleTheme(){
   var btn = document.getElementById('theme-toggle');
   if(btn) btn.innerHTML = isLight ? '&#127769; Modo Escuro' : '&#9728;&#65039; Modo Claro';
 }
+</script>
+
+<script>
+// Ajusta a altura do iframe de Execução ao conteúdo (mesmo domínio) — evita scroll duplo
+function resizeExecFrame(){
+  var f = document.getElementById('execucao-frame');
+  if(!f) return;
+  try {
+    var doc = f.contentWindow.document;
+    var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+    if(h > 0) f.style.height = (h + 20) + 'px';
+  } catch(e) { /* fallback: mantém min-height */ }
+}
+// A tabela do iframe é renderizada via JS, então reexecuta com alguns delays
+function scheduleExecResize(){ [0,150,500,1200].forEach(function(t){ setTimeout(resizeExecFrame, t); }); }
+window.addEventListener('resize', resizeExecFrame);
+window.addEventListener('load', scheduleExecResize);
+document.addEventListener('DOMContentLoaded', function(){
+  var f = document.getElementById('execucao-frame');
+  if(f) f.addEventListener('load', scheduleExecResize);
+  // Reajusta ao voltar para a aba Execução (a tabela pode ter mudado de altura)
+  var btn = document.querySelector('.tab-button[data-tab="execucao"]');
+  if(btn) btn.addEventListener('click', scheduleExecResize);
+});
 </script>
 </body>
 </html>
